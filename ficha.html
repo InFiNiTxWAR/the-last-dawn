@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Last Dawn - Criação de Personagem</title>
+  <link rel="stylesheet" href="styles2/style.css">
+</head>
+<body>
+    <!-- Música de fundo -->
+  <audio id="background-music" autoplay loop>
+    <source src="Cantigas da Taverna Encantada.mp3" type="audio/mpeg">
+    Seu navegador não suporta o elemento de áudio.
+  </audio>
+  <header>
+    <h1>The Last Dawn</h1>
+    <h2>Crie Seu Personagem</h2>
+  </header>
+
+  <main>
+    <form id="character-form">
+      <!-- Atributos -->
+      <section class="section attributes-section">
+        <h2>Atributos</h2>
+        <div class="attributes-grid">
+          <div class="attribute"><label for="strength">Força</label><input type="number" id="strength" min="0" max="100" value="0" /></div>
+          <div class="attribute"><label for="magic">Magia</label><input type="number" id="magic" min="0" max="100" value="0" /></div>
+          <div class="attribute"><label for="agility">Agilidade</label><input type="number" id="agility" min="0" max="100" value="0" /></div>
+          <div class="attribute"><label for="charisma">Carisma</label><input type="number" id="charisma" min="0" max="100" value="0" /></div>
+          <div class="attribute"><label for="intellect">Intelecto</label><input type="number" id="intellect" min="0" max="100" value="0" /></div>
+          <div class="attribute"><label for="vigor">Vigor</label><input type="number" id="vigor" min="0" max="100" value="0" /></div>
+        </div>
+        <!-- NEA (Nível de Eficácia Aumentada) -->
+<section class="section nea-section">
+    <h2>Nível de Experiencia Apocaliptica (NEA)</h2>
+    <div class="input-group">
+        <label for="nea">Escolha seu NEA:</label>
+        <select id="nea">
+            <option value="" disabled selected>Selecione</option>
+            <!-- Opções de 5% a 99% em incrementos de 5% -->
+            <script>
+                for (let i = 0; i < 100; i += 5) {
+                    document.write(`<option value="${i}">${i}%</option>`);
+                }
+            </script>
+        </select>
+    </div>
+</section>
+
+        <div class="status-container">
+            <h2>Status do Personagem</h2>
+            
+            <!-- Vida -->
+            <div class="status-item">
+              <label>Vida:</label>
+              <input type="number" id="vida-input" min="0" value="10">
+              <div class="status-bar">
+                <div id="vida-bar" class="bar" style="width: 100%; background-color: #ff0000;"></div>
+              </div>
+              <span id="vida-status" class="status-message"></span>
+            </div>
+          
+            <!-- Mana -->
+            <div class="status-item">
+              <label>Mana:</label>
+              <input type="number" id="mana-input" min="0" value="10">
+              <div class="status-bar">
+                <div id="mana-bar" class="bar" style="width: 100%; background-color: #0000ff;"></div>
+              </div>
+              <span id="mana-status" class="status-message"></span>
+            </div>
+          
+            <!-- Sanidade -->
+            <div class="status-item">
+              <label>Sanidade:</label>
+              <input type="number" id="sanidade-input" min="0" value="5">
+              <div class="status-bar">
+                <div id="sanidade-bar" class="bar" style="width: 100%; background-color: #800080;"></div>
+              </div>
+              <span id="sanidade-status" class="status-message"></span>
+            </div>
+          
+            <!-- Energia -->
+            <div class="status-item">
+              <label>Energia:</label>
+              <input type="number" id="energia-input" min="0" value="5">
+              <div class="status-bar">
+                <div id="energia-bar" class="bar" style="width: 100%; background-color: #00aa00;"></div>
+              </div>
+              <span id="energia-status" class="status-message"></span>
+            </div>
+          </div>
+      </section>
+
+      <!-- Informações Básicas -->
+      <section class="section basic-info-section">
+        <h2>Informações Básicas</h2>
+        <div class="input-group"><label for="name">Nome</label><input type="text" id="name" required /></div>
+        <div class="input-group"><label for="gender">Gênero</label>
+          <select id="gender" required>
+            <option value="" disabled selected>Selecione</option>
+            <option value="masculino">Masculino</option>
+            <option value="feminino">Feminino</option>
+            <option value="nao-binario">Não-binário</option>
+            <option value="outro">Outro</option>
+          </select>
+        </div>
+        <div class="input-group"><label for="birth-year">Ano de Nascimento</label><input type="number" id="birth-year" min="0" max="3000" required /></div>
+        <div class="input-group"><label for="age">Idade</label><input type="number" id="age" min="0" max="200" required /></div>
+        <div class="input-group"><label for="race">Raça</label>
+          <select id="race" required>
+            <option value="" disabled selected>Selecione</option>
+            <option value="humanos">Humanos</option>
+            <option value="drakonius">Drakonius</option>
+            <option value="astari">Astari</option>
+            <option value="ciborgues">Ciborgues</option>
+            <option value="orcs">Orcs</option>
+            <option value="persuadeans">Persuadeans</option>
+            <option value="dermi-humanos">Dermis-Humanos</option>
+            <option value="elfos-da-lua">Elfos da Lua</option>
+            <option value="anoes-das-montanhas">Anões das Montanhas</option>
+            <option value="tritoes">Tritões</option>
+            <option value="fadas">Fadas</option>
+            <option value="centauros">Centauros</option>
+            <option value="ifritianos">Ifritianos</option>
+            <option value="silvanos">Silvanos</option>
+            <option value="gnolls">Gnolls</option>
+          </select>
+        </div>
+        <div class="input-group"><label for="class">Classe</label>
+          <select id="class" required>
+            <option value="" disabled selected>Selecione</option>
+            <option value="investigador">Investigador</option>
+            <option value="solos">Solos</option>
+            <option value="especialista-em-demolicao">Especialista em Demolição</option>
+            <option value="medico-de-combate">Médico de Combate</option>
+            <option value="cidadao">Cidadão</option>
+            <option value="quimico">Químico</option>
+            <option value="mentalista">Mentalista</option>
+            <option value="mistico-arcano">Místico Arcano</option>
+            <option value="guerreiro-arcanos">Guerreiros Arcanos</option>
+            <option value="aniquilador-mental">Aniquilador Mental</option>
+          </select>
+        </div>
+        <div class="input-group"><label for="school">Formação de Escola</label><input type="text" id="school" required /></div>
+        <div class="input-group"><label for="kingdom">Reino</label>
+          <select id="kingdom" required>
+            <option value="" disabled selected>Selecione</option>
+            <option value="eclipsia">Eclipsia</option>
+            <option value="noctilux">Noctilux</option>
+            <option value="desolaria">Desolaria</option>
+            <option value="solaris">Solaris</option>
+            <option value="nebulon">Nebulon</option>
+            <option value="elfheim">Elfheim</option>
+            <option value="sylvanora">Sylvanora</option>
+            <option value="solharis">Solharis</option>
+            <option value="elyndor">Elyndor</option>
+            <option value="zaharam">Zaharam</option>
+            <option value="arco-de-lunaris">Arco de Lunaris</option>
+          </select>
+        </div>
+        <div class="input-group"><label for="origin">Origem</label><input type="text" id="origin" required /></div>
+      </section>
+
+      <!-- Inventário -->
+      <section class="section inventory-section">
+        <h2>Inventário</h2>
+        <textarea id="inventory" rows="5" placeholder="Descreva os itens iniciais do personagem..."></textarea>
+      </section>
+      <!-- Feitiços e Magias -->
+<section class="section spells-section">
+    <h2>Feitiços e Magias</h2>
+    <textarea id="spells" rows="5" placeholder="Descreva os feitiços e habilidades do personagem..."></textarea>
+</section>
+
+      <button type="submit">Salvar Ficha</button>
+      <!-- Adicione isso antes do fechamento </form> -->
+<div class="form-actions">
+    <button type="button" onclick="returnToMenu()" class="return-button">Retornar ao Menu</button>
+    
+  </div>
+
+    </form>
+  </main>
+
+  <!-- Modal DEVE estar FORA do formulário -->
+  <div id="saveModal" class="save-modal">
+    <div class="save-modal-content">
+      <span class="close-modal">&times;</span>
+      <h3 class="save-modal-title">Salvar Como</h3>
+      <div class="save-options">
+        <div class="save-option" id="savePdf">Salvar como PDF</div>
+        <div class="save-option" id="shareLink">Compartilhar Link</div>
+        <div class="save-option" id="saveLocal">Salvar Localmente</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="scripts/script.js"></script>
+  <script>
+    // Ao carregar a página, verifica se há ficha para carregar
+    document.addEventListener('DOMContentLoaded', function() {
+      const savedSheet = sessionStorage.getItem('currentSheet');
+      if (savedSheet) {
+        const sheetData = JSON.parse(savedSheet);
+        
+        // Preenche os campos com os dados salvos
+        document.getElementById('name').value = sheetData.name || '';
+        document.getElementById('race').value = sheetData.race || '';
+        document.getElementById('class').value = sheetData.class || '';
+        document.getElementById('strength').value = sheetData.strength || 0;
+        // Preencha todos os outros campos aqui...
+        
+        // Limpa o storage após carregar
+        sessionStorage.removeItem('currentSheet');
+      }
+    });
+    </script>
+    <script>
+        // Função para carregar dados salvos
+        function loadSavedCharacter() {
+          const savedData = sessionStorage.getItem('characterToLoad');
+          
+          if (savedData) {
+            const { id, data } = JSON.parse(savedData);
+            
+            // Preenche todos os campos do formulário
+            document.getElementById('name').value = data.name || '';
+            document.getElementById('gender').value = data.gender || '';
+            document.getElementById('birth-year').value = data.birthYear || '';
+            document.getElementById('age').value = data.age || '';
+            document.getElementById('race').value = data.race || '';
+            document.getElementById('class').value = data.class || '';
+            document.getElementById('school').value = data.school || '';
+            document.getElementById('kingdom').value = data.kingdom || '';
+            document.getElementById('origin').value = data.origin || '';
+            document.getElementById('strength').value = data.strength || 0;
+            document.getElementById('magic').value = data.magic || 0;
+            document.getElementById('agility').value = data.agility || 0;
+            document.getElementById('charisma').value = data.charisma || 0;
+            document.getElementById('intellect').value = data.intellect || 0;
+            document.getElementById('vigor').value = data.vigor || 0;
+            document.getElementById('inventory').value = data.inventory || '';
+            
+            // Limpa o sessionStorage após carregar
+            sessionStorage.removeItem('characterToLoad');
+            
+            alert(`Ficha "${data.name}" carregada com sucesso!`);
+          }
+        }
+        
+        // Executa quando a página carrega
+        document.addEventListener('DOMContentLoaded', loadSavedCharacter);
+        </script>
+</body>
+</html>

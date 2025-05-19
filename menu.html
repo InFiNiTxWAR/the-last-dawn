@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Last Dawn - Menu Principal</title>
+  <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+  <!-- Música de fundo -->
+  <audio id="background-music" autoplay loop>
+    <source src="Melodia Encantada.mp3" type="audio/mpeg">
+    Seu navegador não suporta o elemento de áudio.
+  </audio>
+  <div class="menu-container">
+    <h1 class="menu-title">Menu Principal</h1>
+    <button class="menu-button" onclick="window.location.href='ficha.html'">Criar Ficha</button>
+    <button class="menu-button" id="loadButton">Carregar Ficha</button>
+    <div id="savedSheets" class="saved-sheets-container" style="display:none;">
+      <h3>Fichas Salvas:</h3>
+      <ul id="savedSheetsList"></ul>
+    </div>
+  
+    <button class="menu-button" onclick="window.location.href='regras.html'">Guia de Regras</button>
+    <button class="menu-button" onclick="exitGame()">Sair</button>
+  </div>
+
+  <script src="scripts/script.js"></script>
+  
+  <script>
+  // Função para carregar ficha específica (versão corrigida)
+  function loadSheet(sheetId) {
+    // Verifica se o ID existe
+    if (!sheetId) return;
+    
+    // Recupera os dados do localStorage
+    const sheetData = JSON.parse(localStorage.getItem(sheetId));
+    
+    if (!sheetData) {
+      alert("Ficha não encontrada!");
+      return;
+    }
+    
+    // Armazena temporariamente para a página de ficha
+    sessionStorage.setItem('characterToLoad', JSON.stringify({
+      id: sheetId,
+      data: sheetData
+    }));
+    
+    // Redireciona para a página de ficha
+    window.location.href = 'ficha.html';
+  }
+  </script>
+</body>
+</html>
