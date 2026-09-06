@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE LAST DAWN · Crônica XVI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #1a1008;
+            background-image:
+                radial-gradient(ellipse at center, #2c1810 0%, #1a1008 60%, #0d0805 100%);
+            font-family: 'Cormorant Garamond', 'Georgia', serif;
+            color: #f0e2c5;
+            min-height: 100vh;
+            padding: 2rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                repeating-linear-gradient(90deg, rgba(50, 30, 10, 0.15) 0px, rgba(50, 30, 10, 0.15) 2px, transparent 2px, transparent 100px),
+                repeating-linear-gradient(0deg, rgba(30, 18, 8, 0.1) 0px, rgba(30, 18, 8, 0.1) 2px, transparent 2px, transparent 80px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .main-container {
+            max-width: 950px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+            background: linear-gradient(180deg, rgba(44, 24, 16, 0.95) 0%, rgba(30, 18, 10, 0.98) 100%);
+            border: 4px solid #8b6914;
+            border-radius: 12px;
+            box-shadow:
+                0 0 60px rgba(139, 105, 20, 0.3),
+                inset 0 0 40px rgba(0, 0, 0, 0.8),
+                0 0 0 2px #6b4c2a,
+                0 0 0 6px #2c1810;
+            padding: 2.5rem;
+        }
+
+        .back-btn {
+            display: inline-block;
+            color: #e8d48b;
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            padding: 0.5rem 1.2rem;
+            border: 2px solid #8b6914;
+            background: linear-gradient(180deg, #2c1810 0%, #1a0f08 100%);
+            margin-bottom: 1.5rem;
+            transition: 0.3s;
+            letter-spacing: 2px;
+            border-radius: 3px;
+            text-transform: uppercase;
+        }
+
+        .back-btn:hover {
+            background: linear-gradient(180deg, #4a2c1a 0%, #2c1810 100%);
+            box-shadow: 0 0 20px rgba(201, 168, 76, 0.4);
+            color: #fff;
+        }
+
+        .archive-header {
+            border: 3px solid #8b6914;
+            background: linear-gradient(180deg, rgba(60, 35, 20, 0.8) 0%, rgba(30, 18, 10, 0.9) 100%);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            box-shadow:
+                0 0 25px rgba(139, 105, 20, 0.3),
+                inset 0 0 30px rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+        }
+
+        .archive-header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: #c9a84c;
+            text-shadow:
+                0 0 20px rgba(201, 168, 76, 0.6),
+                2px 2px 4px rgba(0, 0, 0, 0.8);
+            letter-spacing: 4px;
+            margin-bottom: 0.5rem;
+            font-weight: 900;
+        }
+
+        .archive-header .status-line {
+            font-family: 'Cinzel', serif;
+            color: #e8d48b;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+        }
+
+        .session-title-section {
+            text-align: center;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            border-bottom: 2px solid #8b6914;
+            position: relative;
+        }
+
+        .session-title-section::after {
+            content: "❖";
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a0f08;
+            padding: 0 1rem;
+            color: #c9a84c;
+            font-size: 1.2rem;
+        }
+
+        .session-title-section h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            color: #e8d48b;
+            text-shadow: 0 0 10px rgba(201, 168, 76, 0.5);
+        }
+
+        .session-title-section .subtitle {
+            font-size: 1.3rem;
+            color: #c9a84c;
+            font-style: italic;
+            margin-top: 0.5rem;
+        }
+
+        .session-quote {
+            color: #a89870;
+            font-style: italic;
+            text-align: center;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+            padding: 0.8rem;
+            border-left: 2px solid #6b4c2a;
+            border-right: 2px solid #6b4c2a;
+        }
+
+        .info-card {
+            background: rgba(20, 12, 6, 0.8);
+            border: 2px solid #6b4c2a;
+            border-left: 4px solid #c9a84c;
+            padding: 1.2rem 1.5rem;
+            margin: 1.2rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+            border-radius: 4px;
+        }
+
+        .info-card h3 {
+            font-family: 'Cinzel', serif;
+            color: #c9a84c;
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            letter-spacing: 1px;
+            border-bottom: 1px solid #6b4c2a;
+            padding-bottom: 0.4rem;
+        }
+
+        .info-card p {
+            line-height: 1.7;
+            margin: 0.3rem 0;
+            color: #d4c09a;
+        }
+
+        .highlight {
+            color: #e8d48b;
+            font-weight: bold;
+        }
+
+        .warning-box {
+            background: rgba(30, 10, 5, 0.8);
+            border: 2px solid #8b1a1a;
+            padding: 1.2rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .warning-box h4 {
+            font-family: 'Cinzel', serif;
+            color: #c92a2a;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        .warning-box p {
+            color: #d4c09a;
+            line-height: 1.7;
+            margin: 0.3rem 0;
+        }
+
+        .quote-box {
+            background: rgba(10, 5, 2, 0.8);
+            border-left: 3px solid #8b6914;
+            padding: 0.8rem 1rem;
+            margin: 0.5rem 0;
+            font-style: italic;
+            color: #c9a84c;
+        }
+
+        /* ESTILOS DOS MVPs COM REVELAÇÃO */
+        .mvp-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            margin-top: 1rem;
+        }
+
+        .mvp-reveal {
+            background: rgba(15, 8, 4, 0.9);
+            border: 2px solid #6b4c2a;
+            border-radius: 6px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        .mvp-reveal:hover {
+            border-color: #c9a84c;
+            box-shadow: 0 0 15px rgba(201, 168, 76, 0.3);
+        }
+
+        .mvp-reveal.revealed {
+            border-color: #c9a84c;
+            background: rgba(20, 12, 6, 0.9);
+            cursor: default;
+        }
+
+        .mvp-hidden {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .mvp-reveal.revealed .mvp-hidden {
+            display: none;
+        }
+
+        .mvp-question-mark {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            color: #c9a84c;
+            font-weight: bold;
+            text-shadow: 0 0 15px rgba(201, 168, 76, 0.8);
+            animation: pulseQuestion 1.5s infinite;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        @keyframes pulseQuestion {
+
+            0%,
+            100% {
+                opacity: 1;
+                text-shadow: 0 0 15px rgba(201, 168, 76, 0.8);
+            }
+
+            50% {
+                opacity: 0.6;
+                text-shadow: 0 0 30px rgba(201, 168, 76, 1);
+            }
+        }
+
+        .mvp-label-hidden {
+            font-family: 'Cinzel', serif;
+            color: #8b6914;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .mvp-category-hidden {
+            color: #6b4c2a;
+            font-size: 0.8rem;
+            margin-top: 0.2rem;
+            font-style: italic;
+        }
+
+        .mvp-revealed-content {
+            display: none;
+            align-items: center;
+            gap: 1.2rem;
+            animation: revealContent 0.5s ease;
+        }
+
+        .mvp-reveal.revealed .mvp-revealed-content {
+            display: flex;
+        }
+
+        @keyframes revealContent {
+            0% {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .mvp-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 3px solid #c9a84c;
+            box-shadow: 0 0 20px rgba(201, 168, 76, 0.5);
+            background: #1a0f08;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .mvp-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            filter: brightness(0.9) saturate(0.9) sepia(0.3);
+        }
+
+        .mvp-info-revealed {
+            flex: 1;
+        }
+
+        .mvp-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: #e8d48b;
+            font-weight: bold;
+            text-shadow: 0 0 8px rgba(201, 168, 76, 0.5);
+            margin-bottom: 0.3rem;
+        }
+
+        .mvp-category {
+            font-family: 'Cinzel', serif;
+            color: #c9a84c;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.3rem;
+        }
+
+        .mvp-description {
+            color: #d4c09a;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        /* Medalhas para os MVPs */
+        .mvp-medal {
+            font-size: 2rem;
+            margin-right: 0.5rem;
+        }
+
+        /* Animação de shake ao clicar */
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            10%,
+            30%,
+            50%,
+            70%,
+            90% {
+                transform: translateX(-4px);
+            }
+
+            20%,
+            40%,
+            60%,
+            80% {
+                transform: translateX(4px);
+            }
+        }
+
+        .shaking {
+            animation: shake 0.6s ease-in-out;
+        }
+
+        /* Efeito de glitch na revelação */
+        @keyframes glitchReveal {
+            0% {
+                clip-path: inset(0 0 90% 0);
+            }
+
+            10% {
+                clip-path: inset(20% 0 60% 0);
+            }
+
+            20% {
+                clip-path: inset(60% 0 10% 0);
+            }
+
+            30% {
+                clip-path: inset(10% 0 80% 0);
+            }
+
+            40% {
+                clip-path: inset(50% 0 30% 0);
+            }
+
+            50% {
+                clip-path: inset(0 0 0 0);
+            }
+
+            100% {
+                clip-path: inset(0 0 0 0);
+            }
+        }
+
+        .mvp-reveal.just-revealed .mvp-revealed-content {
+            animation: glitchReveal 0.5s steps(5) forwards, revealContent 0.5s ease;
+        }
+
+        .moment-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .moment-list li {
+            padding: 0.4rem 0;
+            border-bottom: 1px solid #2c1810;
+            color: #d4c09a;
+        }
+
+        .moment-list li::before {
+            content: "✦ ";
+            color: #c9a84c;
+        }
+
+        .encerramento {
+            background: rgba(15, 8, 4, 0.9);
+            border: 2px solid #8b6914;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            font-style: italic;
+            color: #e8d48b;
+            text-align: center;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Partículas douradas dentro dos cards de MVP */
+        .spark {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #e8d48b;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: sparkFloat 1s ease-out forwards;
+            box-shadow: 0 0 6px rgba(232, 212, 139, 0.8);
+        }
+
+        @keyframes sparkFloat {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(var(--tx), var(--ty)) scale(0);
+            }
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem;
+            }
+
+            .main-container {
+                padding: 1.5rem;
+            }
+
+            .archive-header h1 {
+                font-size: 1.4rem;
+            }
+
+            .mvp-revealed-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="main-container">
+        <a href="../index.html" class="back-btn">◄ Retornar às Crônicas</a>
+
+        <!-- CABEÇALHO DO ARQUIVO -->
+        <div class="archive-header">
+            <h1>━━━ THE LAST DAWN ━━━</h1>
+            <div style="font-family: 'Cinzel', serif; font-size: 1.1rem; color: #c9a84c;">CRÔNICA XVI</div>
+            <div class="status-line">
+                STATUS: <span style="color: #4a7c2a;">LIBERADO</span> &nbsp;|&nbsp;
+                CLASSIFICAÇÃO: <span style="color: #c92a2a;">NÍVEL 3</span> &nbsp;|&nbsp;
+                DATA: <span style="color: #e8d48b;">16º dia do 8º mês</span>
+            </div>
+        </div>
+
+        <!-- TÍTULO DA SESSÃO -->
+        <div class="session-title-section">
+            <h2>🔱 REGISTRO OFICIAL — SESSÃO XVI</h2>
+            <div class="subtitle">"A Ruptura do Céu"</div>
+        </div>
+
+        <div class="session-quote">
+            "Algumas batalhas terminam quando o inimigo cai. Outras terminam quando o céu se abre."
+        </div>
+
+        <!-- XP DE OFÍCIO -->
+        <div class="info-card">
+            <h3>🧮 XP DE OFÍCIO — O QUE CADA UM FEZ</h3>
+
+            <p><span class="highlight">⚕️ Elion — Médico / Clérigo</span></p>
+            <p>• Utilizou sua habilidade para impedir a morte de Evangeline após ela chegar a 0 PV</p>
+            <p>• Auxiliou na recuperação dos sobreviventes após o ataque de Xavier</p>
+            <p>→ <span class="highlight">+40 XP</span> | 610 → <strong>650 XP — NÍVEL 4</strong></p>
+
+            <br>
+            <p><span class="highlight">🏹 Caçador — Rastreador</span></p>
+            <p>• Não realizou uma ação diretamente relacionada ao seu ofício que justificasse XP</p>
+            <p>→ <span class="highlight">+0 XP</span> | 410 → <strong>410 XP</strong></p>
+
+            <br>
+            <p><span class="highlight">🌿 Evangeline — Herbalista / Alquimista</span></p>
+            <p>• Não realizou uma ação diretamente relacionada ao seu ofício durante a sessão</p>
+            <p>→ <span class="highlight">+0 XP</span> | 380 → <strong>380 XP</strong></p>
+
+            <br>
+            <p><span class="highlight">🐊 Crocotop — Pescador</span></p>
+            <p>• Não realizou uma ação diretamente relacionada ao seu ofício</p>
+            <p>→ <span class="highlight">+0 XP</span> | 200 → <strong>200 XP</strong></p>
+
+            <br>
+            <p><span class="highlight">🍳 Eren — Cozinheiro</span></p>
+            <p>• Não realizou uma ação diretamente relacionada ao seu ofício</p>
+            <p>→ <span class="highlight">+0 XP</span> | 160 → <strong>160 XP</strong></p>
+
+            <br>
+            <p><span class="highlight">⚔️ Dravon — Mercenário</span></p>
+            <p>• Não participou dos acontecimentos principais desta sessão</p>
+            <p>→ <span class="highlight">+0 XP</span> | 70 → <strong>70 XP</strong></p>
+
+            <br>
+            <p><span class="highlight">🔨 Kael — Ferreiro / Técnico de Forja-Viva</span></p>
+            <p>• Não realizou nenhuma atividade diretamente relacionada ao seu ofício</p>
+            <p>→ <span class="highlight">+0 XP</span> | 40 → <strong>40 XP</strong></p>
+        </div>
+
+        <!-- N.E.A. -->
+        <div class="info-card">
+            <h3>📊 N.E.A. — EXPOSIÇÃO ARCANA</h3>
+            <p>A sessão apresentou uma exposição arcana muito superior ao normal.</p>
+            <p>A abertura de uma <span class="highlight">Ruptura</span>, a manifestação de <span
+                    class="highlight">Xavier</span>, o uso de um selo ritual Ifritiano e a presença de magia capaz de
+                devastar uma área inteira provocaram forte aumento da Exposição Arcana.</p>
+            <br>
+            <p>• <span class="highlight">⚕️ Elion:</span> <strong>38,4%</strong> (+3,5%)</p>
+            <p>• <span class="highlight">🏹 Caçador:</span> <strong>37,1%</strong> (+2,2%)</p>
+            <p>• <span class="highlight">🌿 Evangeline:</span> <strong>38,0%</strong> (+4,5%)</p>
+            <p>• <span class="highlight">🐊 Crocotop:</span> <strong>45,0%</strong> (+3,9%)</p>
+            <p>• <span class="highlight">🍳 Eren:</span> <strong>44,1%</strong> (+1,8%)</p>
+            <p>• <span class="highlight">⚔️ Dravon:</span> <strong>27,7%</strong> (+1,0%)</p>
+            <p>• <span class="highlight">🔨 Kael:</span> <strong>27,0%</strong> (+2,0%)</p>
+        </div>
+
+        <!-- DEBUFF EVANGELINE -->
+        <div class="warning-box">
+            <h4>⚠️ MALDIÇÃO TEMPORÁRIA — EVANGELINE</h4>
+            <p><strong>INCOMPATIBILIDADE DE MANA</strong></p>
+            <p>Durante o combate, Elion utilizou seu Orbe para fortalecer Evangeline, transferindo parte de sua própria
+                energia mágica para ela.</p>
+            <p>O problema não foi simplesmente a quantidade de mana.</p>
+            <p><strong>A mana possui uma ligação com a essência de seu usuário.</strong></p>
+            <p>A energia do Orbe não pertence originalmente a Evangeline.</p>
+            <p>Por isso, seu corpo não consegue utilizar aquela energia com eficiência total.</p>
+            <br>
+            <p><strong>Efeitos temporários:</strong></p>
+            <p>• <span class="highlight">−10% na eficiência das magias</span></p>
+            <p>• Magias consomem <span class="highlight">+10% de mana</span></p>
+            <p>• Uso excessivo de magia pode provocar <span class="highlight">dor, tontura e instabilidade arcana</span>
+            </p>
+            <p>• O efeito permanece até que a energia estranha seja completamente assimilada ou removida</p>
+            <br>
+            <div class="quote-box">
+                <p>"A mana pode ser transferida.</p>
+                <p>Mas isso não significa que ela possa ser simplesmente usada como se sempre tivesse pertencido àquele
+                    corpo."</p>
+            </div>
+        </div>
+
+        <!-- HONRA -->
+        <div class="info-card">
+            <h3>🛡️ HONRA — AÇÕES DA SESSÃO</h3>
+            <p><span class="highlight">⚕️ Elion +3%</span> → 100% (Capado)</p>
+            <p style="font-size:0.85rem; color:#a89870;">• Salvou Evangeline da morte • Auxiliou os sobreviventes após o
+                ataque</p>
+
+            <p><span class="highlight">🏹 Caçador +1%</span> → 100% (Capado)</p>
+            <p style="font-size:0.85rem; color:#a89870;">• Permaneceu no combate mesmo gravemente ferido</p>
+
+            <p><span class="highlight">🌿 Evangeline +0%</span> → 97%</p>
+
+            <p><span class="highlight">🐊 Crocotop +1%</span> → 46%</p>
+            <p style="font-size:0.85rem; color:#a89870;">• Permaneceu ativo durante o confronto</p>
+
+            <p><span class="highlight">🍳 Eren +1%</span> → 47%</p>
+            <p style="font-size:0.85rem; color:#a89870;">• Permaneceu ao lado do grupo durante o confronto</p>
+
+            <p><span class="highlight">⚔️ Dravon</span> — Sem alteração → 1%</p>
+
+            <p><span class="highlight">🔨 Kael</span> — Sem alteração</p>
+        </div>
+
+        <!-- CORRUPÇÃO -->
+        <div class="info-card">
+            <h3>☠️ CORRUPÇÃO</h3>
+            <p><strong>Nenhuma alteração.</strong></p>
+            <p>Apesar do contato com a Ruptura e com manifestações arcanas extremamente perigosas, não houve uma ação
+                que justificasse alteração direta na Corrupção.</p>
+        </div>
+
+        <!-- DESCOBERTAS -->
+        <div class="info-card">
+            <h3>📚 DESCOBERTAS IMPORTANTES</h3>
+            <p>• Barney revelou sua verdadeira identidade como <span class="highlight">Ifritiano</span></p>
+            <p>• Barney utilizou um <span class="highlight">selo ritual</span> diretamente sobre a criatura</p>
+            <p>• O selo provocou a abertura de uma <span class="highlight">Ruptura no céu</span></p>
+            <p>• <span class="highlight">Xavier</span> surgiu através da Ruptura</p>
+            <p>• Xavier foi responsável pela gigantesca manifestação de fogo</p>
+            <p>• O ataque de Xavier devastou a área do confronto</p>
+            <p>• <span class="highlight">Aerelith</span> revelou-se um <span class="highlight">elfo de Elyndor</span>
+            </p>
+            <p>• Aerelith não foi responsável pelo ataque de fogo</p>
+            <p>• Aerelith apareceu durante o caos e <span class="highlight">conteve o Caçador</span>, impedindo sua
+                intervenção</p>
+            <p>• Evangeline sofreu <span class="highlight">130 de dano</span> durante o ataque de Xavier</p>
+            <p>• Evangeline chegou a <span class="highlight">0 PV</span></p>
+            <p>• Elion utilizou uma habilidade para puxá-la de volta à vida</p>
+            <p>• Evangeline permaneceu viva com <span class="highlight">1 PV</span></p>
+            <p>• A mana utilizada pelo Orbe de Elion deixou uma <span class="highlight">incompatibilidade arcana
+                    temporária em Evangeline</span></p>
+            <p>• Elion estava afastado da área principal e não sofreu o ataque diretamente</p>
+            <p>• Caçador permaneceu gravemente ferido</p>
+            <p>• Os anciões presenciaram a manifestação da Ruptura</p>
+            <p>• Os anciões conseguiram posteriormente <span class="highlight">fechar a Ruptura</span></p>
+            <p>• Elion percebeu que havia a possibilidade de <span class="highlight">algo ter atravessado a Ruptura
+                    antes de seu fechamento</span></p>
+            <p>• Um dos anciões demonstrou possuir a capacidade de <span class="highlight">ler a mente de Elion</span>
+            </p>
+            <p>• Após o confronto, os anciões começaram a transportar alguns dos aventureiros através de uma magia
+                desconhecida</p>
+            <p>• A energia da alma de <span class="highlight">Levi</span>, ligada à caixa, tornou-se alvo de uma
+                tentativa de interferência</p>
+            <p>• <span class="highlight">Kaelen</span> apareceu durante a situação envolvendo Eren</p>
+            <p>• Kaelen fugiu junto de Eren</p>
+            <p>• Caçador permaneceu para trás junto de <span class="highlight">Arely e dos anciões</span></p>
+            <p>• A verdadeira intenção dos anciões continua desconhecida</p>
+        </div>
+
+        <!-- MVPs DA SESSÃO - COM SISTEMA DE REVELAÇÃO -->
+        <div class="info-card">
+            <h3>👑 MVPs DA SESSÃO</h3>
+            <p style="color: #8b6914; font-size: 0.85rem; margin-bottom: 1rem; font-style: italic;">✦ Toque nos selos
+                para revelar os heróis</p>
+
+            <div class="mvp-container">
+
+                <!-- MVP 1º Lugar - ELION -->
+                <div class="mvp-reveal" onclick="revealMVP(this)" data-mvp="primeiro">
+                    <div class="mvp-hidden">
+                        <div class="mvp-question-mark">?</div>
+                        <div>
+                            <div class="mvp-label-hidden">🥇 1º LUGAR — MVP</div>
+                            <div class="mvp-category-hidden">[Toque para revelar]</div>
+                        </div>
+                    </div>
+                    <div class="mvp-revealed-content">
+                        <div class="mvp-avatar">
+                            <img src="../assets/img/elion.png" alt="Elion">
+                        </div>
+                        <div class="mvp-info-revealed">
+                            <div class="mvp-name">Elion</div>
+                            <div class="mvp-category">🥇 MVP da Sessão</div>
+                            <div class="mvp-description">
+                                • Percebeu o perigo da magia antes do ataque<br>
+                                • Manteve-se fora da área de destruição<br>
+                                • Salvou Evangeline quando ela chegou a 0 PV
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MVP 2º Lugar - CROCOTOP -->
+                <div class="mvp-reveal" onclick="revealMVP(this)" data-mvp="segundo">
+                    <div class="mvp-hidden">
+                        <div class="mvp-question-mark">?</div>
+                        <div>
+                            <div class="mvp-label-hidden">🥈 2º LUGAR — MVP</div>
+                            <div class="mvp-category-hidden">[Toque para revelar]</div>
+                        </div>
+                    </div>
+                    <div class="mvp-revealed-content">
+                        <div class="mvp-avatar">
+                            <img src="../assets/img/crocotop.png" alt="Crocotop">
+                        </div>
+                        <div class="mvp-info-revealed">
+                            <div class="mvp-name">Crocotop</div>
+                            <div class="mvp-category">🥈 Segundo Lugar</div>
+                            <div class="mvp-description">
+                                • Teve uma participação importante durante o confronto<br>
+                                • Permaneceu ativo diante da manifestação de poder de Xavier 67
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Destaque - EVANGELINE -->
+                <div class="mvp-reveal" onclick="revealMVP(this)" data-mvp="destaque">
+                    <div class="mvp-hidden">
+                        <div class="mvp-question-mark">?</div>
+                        <div>
+                            <div class="mvp-label-hidden">🥉 DESTAQUE</div>
+                            <div class="mvp-category-hidden">[Toque para revelar]</div>
+                        </div>
+                    </div>
+                    <div class="mvp-revealed-content">
+                        <div class="mvp-avatar">
+                            <img src="../assets/img/evangeline.png" alt="Evangeline">
+                        </div>
+                        <div class="mvp-info-revealed">
+                            <div class="mvp-name">Evangeline</div>
+                            <div class="mvp-category">🥉 Destaque da Sessão</div>
+                            <div class="mvp-description">
+                                • Permaneceu no campo de batalha<br>
+                                • Sobreviveu ao ataque devastador de Xavier<br>
+                                • Ficou à beira da morte
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- MOMENTOS MARCANTES -->
+        <div class="info-card">
+            <h3>🎬 MOMENTOS MARCANTES</h3>
+            <ul class="moment-list">
+                <li>Elion percebendo que a magia que estava por vir seria extremamente perigosa</li>
+                <li>Elion subindo para um telhado mais distante</li>
+                <li>O Orbe fortalecendo Evangeline durante a batalha</li>
+                <li>A incompatibilidade da mana do Orbe com o corpo de Evangeline</li>
+                <li>Barney revelando: <span class="highlight">"Foi mal, gente... mas eu sou Ifritiano."</span></li>
+                <li>Barney lançando o selo ritual sobre a criatura</li>
+                <li>A abertura da enorme Ruptura no céu</li>
+                <li><span class="highlight">Xavier surgindo da Ruptura</span></li>
+                <li>Xavier lançando fogo sobre todo o campo de batalha</li>
+                <li><span class="highlight">Aerelith, elfo de Elyndor, contendo o Caçador</span></li>
+                <li>Evangeline recebendo 130 de dano</li>
+                <li>Evangeline chegando a 0 PV</li>
+                <li>A mão de Elion puxando Evangeline de volta</li>
+                <li>Evangeline permanecendo viva com apenas 1 PV</li>
+                <li>Os anciões chegando após o desastre</li>
+                <li>O fechamento da Ruptura</li>
+                <li>Elion percebendo que talvez alguma coisa tivesse atravessado a fenda</li>
+                <li>O ancião demonstrando que conseguia ler a mente de Elion</li>
+                <li>A tentativa de interferência na alma de Levi</li>
+                <li>Kaelen aparecendo e retirando Eren da situação</li>
+                <li>Eren e Kaelen fugindo juntos</li>
+                <li>Caçador ficando para trás com Arely e os anciões</li>
+            </ul>
+        </div>
+
+        <!-- ENCERRAMENTO -->
+        <div class="encerramento">
+            <p>📖 <strong>ENCERRAMENTO</strong></p>
+            <br>
+            <p><em>Barney não era quem dizia ser.</em></p>
+            <p><em>O selo foi lançado.</em></p>
+            <p><em>O céu se abriu.</em></p>
+            <p><em>E então... Xavier veio.</em></p>
+            <br>
+            <p><em>O fogo caiu sobre o campo de batalha como uma sentença.</em></p>
+            <p><em>Alguns sobreviveram por pouco.</em></p>
+            <p><em>Outros foram levados.</em></p>
+            <p><em>E alguns ficaram para trás.</em></p>
+            <br>
+            <p><em>A Ruptura foi fechada.</em></p>
+            <p><em>Mas Elion percebeu algo que ninguém conseguiu ignorar.</em></p>
+            <p><em>Talvez o fechamento não tenha sido rápido o suficiente.</em></p>
+            <p><em>Talvez alguma coisa tenha atravessado.</em></p>
+            <br>
+            <p><em>Enquanto isso...</em></p>
+            <p><em>Evangeline continua preso entre a vida e a morte.</em></p>
+            <p><em>Os anciões sabem mais do que dizem.</em></p>
+            <p><em>Kaelen e Eren desapareceram.</em></p>
+            <p><em>E Caçador permaneceu para trás.</em></p>
+            <br>
+            <p><strong>O grupo não terminou apenas uma batalha.</strong></p>
+            <p><strong>Eles acabaram de descobrir que existem forças capazes de atravessar o próprio céu.</strong></p>
+            <br>
+            <p style="font-size: 1.3rem; color: #c9a84c;"><strong>A Quinta Tempestade continua.</strong></p>
+        </div>
+
+        <div style="text-align:center; margin-top:2rem;">
+            <a href="../index.html" class="back-btn">◄ Retornar às Crônicas</a>
+        </div>
+    </div>
+
+    <script>
+        function revealMVP(element) {
+            if (element.classList.contains('revealed')) {
+                return;
+            }
+
+            element.classList.add('shaking');
+            createSparks(element);
+
+            setTimeout(() => {
+                element.classList.remove('shaking');
+                element.classList.add('revealed');
+                element.classList.add('just-revealed');
+
+                setTimeout(() => {
+                    element.classList.remove('just-revealed');
+                }, 500);
+
+                console.log('🔓 Herói revelado: ' + element.getAttribute('data-mvp'));
+            }, 600);
+        }
+
+        function createSparks(element) {
+            const rect = element.getBoundingClientRect();
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            for (let i = 0; i < 12; i++) {
+                const spark = document.createElement('div');
+                spark.className = 'spark';
+
+                const angle = (Math.PI * 2 * i) / 12;
+                const distance = 30 + Math.random() * 40;
+                const tx = Math.cos(angle) * distance;
+                const ty = Math.sin(angle) * distance;
+
+                spark.style.setProperty('--tx', tx + 'px');
+                spark.style.setProperty('--ty', ty + 'px');
+                spark.style.left = centerX + 'px';
+                spark.style.top = centerY + 'px';
+
+                element.appendChild(spark);
+
+                setTimeout(() => {
+                    spark.remove();
+                }, 1000);
+            }
+        }
+    </script>
+
+</body>
+
+</html>

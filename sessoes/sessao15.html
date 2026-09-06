@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THE LAST DAWN · Crônica XV</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #1a1008;
+      background-image: 
+        radial-gradient(ellipse at center, #2c1810 0%, #1a1008 60%, #0d0805 100%);
+      font-family: 'Cormorant Garamond', 'Georgia', serif;
+      color: #f0e2c5;
+      min-height: 100vh;
+      padding: 2rem;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        repeating-linear-gradient(90deg, rgba(50, 30, 10, 0.15) 0px, rgba(50, 30, 10, 0.15) 2px, transparent 2px, transparent 100px),
+        repeating-linear-gradient(0deg, rgba(30, 18, 8, 0.1) 0px, rgba(30, 18, 8, 0.1) 2px, transparent 2px, transparent 80px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .main-container {
+      max-width: 950px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 10;
+      background: linear-gradient(180deg, rgba(44, 24, 16, 0.95) 0%, rgba(30, 18, 10, 0.98) 100%);
+      border: 4px solid #8b6914;
+      border-radius: 12px;
+      box-shadow: 
+        0 0 60px rgba(139, 105, 20, 0.3),
+        inset 0 0 40px rgba(0, 0, 0, 0.8),
+        0 0 0 2px #6b4c2a,
+        0 0 0 6px #2c1810;
+      padding: 2.5rem;
+    }
+
+    .back-btn {
+      display: inline-block;
+      color: #e8d48b;
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      padding: 0.5rem 1.2rem;
+      border: 2px solid #8b6914;
+      background: linear-gradient(180deg, #2c1810 0%, #1a0f08 100%);
+      margin-bottom: 1.5rem;
+      transition: 0.3s;
+      letter-spacing: 2px;
+      border-radius: 3px;
+      text-transform: uppercase;
+    }
+
+    .back-btn:hover {
+      background: linear-gradient(180deg, #4a2c1a 0%, #2c1810 100%);
+      box-shadow: 0 0 20px rgba(201, 168, 76, 0.4);
+      color: #fff;
+    }
+
+    .archive-header {
+      border: 3px solid #8b6914;
+      background: linear-gradient(180deg, rgba(60, 35, 20, 0.8) 0%, rgba(30, 18, 10, 0.9) 100%);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      box-shadow: 
+        0 0 25px rgba(139, 105, 20, 0.3),
+        inset 0 0 30px rgba(0, 0, 0, 0.5);
+      border-radius: 8px;
+    }
+
+    .archive-header h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 2rem;
+      color: #c9a84c;
+      text-shadow: 
+        0 0 20px rgba(201, 168, 76, 0.6),
+        2px 2px 4px rgba(0, 0, 0, 0.8);
+      letter-spacing: 4px;
+      margin-bottom: 0.5rem;
+      font-weight: 900;
+    }
+
+    .archive-header .status-line {
+      font-family: 'Cinzel', serif;
+      color: #e8d48b;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+    }
+
+    .session-title-section {
+      text-align: center;
+      margin: 2rem 0;
+      padding: 1.5rem;
+      border-bottom: 2px solid #8b6914;
+      position: relative;
+    }
+
+    .session-title-section::after {
+      content: "❖";
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1a0f08;
+      padding: 0 1rem;
+      color: #c9a84c;
+      font-size: 1.2rem;
+    }
+
+    .session-title-section h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.8rem;
+      color: #e8d48b;
+      text-shadow: 0 0 10px rgba(201, 168, 76, 0.5);
+    }
+
+    .session-title-section .subtitle {
+      font-size: 1.3rem;
+      color: #c9a84c;
+      font-style: italic;
+      margin-top: 0.5rem;
+    }
+
+    .session-title-section .epigraph {
+      color: #a89870;
+      font-style: italic;
+      margin-top: 1rem;
+      font-size: 0.95rem;
+      border-top: 1px solid #6b4c2a;
+      padding-top: 1rem;
+    }
+
+    .info-card {
+      background: rgba(20, 12, 6, 0.8);
+      border: 2px solid #6b4c2a;
+      border-left: 4px solid #c9a84c;
+      padding: 1.2rem 1.5rem;
+      margin: 1.2rem 0;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+      border-radius: 4px;
+    }
+
+    .info-card h3 {
+      font-family: 'Cinzel', serif;
+      color: #c9a84c;
+      font-size: 1.1rem;
+      margin-bottom: 0.8rem;
+      letter-spacing: 1px;
+      border-bottom: 1px solid #6b4c2a;
+      padding-bottom: 0.4rem;
+    }
+
+    .info-card p {
+      line-height: 1.7;
+      margin: 0.3rem 0;
+      color: #d4c09a;
+    }
+
+    .highlight {
+      color: #e8d48b;
+      font-weight: bold;
+    }
+
+    .mvp-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      margin-top: 1rem;
+    }
+
+    .mvp-reveal {
+      background: rgba(15, 8, 4, 0.9);
+      border: 2px solid #6b4c2a;
+      border-radius: 6px;
+      padding: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    .mvp-reveal:hover {
+      border-color: #c9a84c;
+      box-shadow: 0 0 15px rgba(201, 168, 76, 0.3);
+    }
+
+    .mvp-reveal.revealed {
+      border-color: #c9a84c;
+      background: rgba(20, 12, 6, 0.9);
+      cursor: default;
+    }
+
+    .mvp-hidden {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .mvp-reveal.revealed .mvp-hidden {
+      display: none;
+    }
+
+    .mvp-question-mark {
+      font-family: 'Cinzel', serif;
+      font-size: 2.5rem;
+      color: #c9a84c;
+      font-weight: bold;
+      text-shadow: 0 0 15px rgba(201, 168, 76, 0.8);
+      animation: pulseQuestion 1.5s infinite;
+      min-width: 60px;
+      text-align: center;
+    }
+
+    @keyframes pulseQuestion {
+      0%, 100% { opacity: 1; text-shadow: 0 0 15px rgba(201, 168, 76, 0.8); }
+      50% { opacity: 0.6; text-shadow: 0 0 30px rgba(201, 168, 76, 1); }
+    }
+
+    .mvp-label-hidden {
+      font-family: 'Cinzel', serif;
+      color: #8b6914;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .mvp-category-hidden {
+      color: #6b4c2a;
+      font-size: 0.8rem;
+      margin-top: 0.2rem;
+      font-style: italic;
+    }
+
+    .mvp-revealed-content {
+      display: none;
+      align-items: center;
+      gap: 1.2rem;
+      animation: revealContent 0.5s ease;
+    }
+
+    .mvp-reveal.revealed .mvp-revealed-content {
+      display: flex;
+    }
+
+    @keyframes revealContent {
+      0% { opacity: 0; transform: translateY(-10px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .mvp-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 3px solid #c9a84c;
+      box-shadow: 0 0 20px rgba(201, 168, 76, 0.5);
+      background: #1a0f08;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .mvp-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      filter: brightness(0.9) saturate(0.9) sepia(0.3);
+    }
+
+    .mvp-info-revealed {
+      flex: 1;
+    }
+
+    .mvp-name {
+      font-family: 'Cinzel', serif;
+      font-size: 1.3rem;
+      color: #e8d48b;
+      font-weight: bold;
+      text-shadow: 0 0 8px rgba(201, 168, 76, 0.5);
+      margin-bottom: 0.3rem;
+    }
+
+    .mvp-category {
+      font-family: 'Cinzel', serif;
+      color: #c9a84c;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.3rem;
+    }
+
+    .mvp-description {
+      color: #d4c09a;
+      font-size: 0.85rem;
+      line-height: 1.4;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+      20%, 40%, 60%, 80% { transform: translateX(4px); }
+    }
+
+    .shaking {
+      animation: shake 0.6s ease-in-out;
+    }
+
+    @keyframes glitchReveal {
+      0% { clip-path: inset(0 0 90% 0); }
+      10% { clip-path: inset(20% 0 60% 0); }
+      20% { clip-path: inset(60% 0 10% 0); }
+      30% { clip-path: inset(10% 0 80% 0); }
+      40% { clip-path: inset(50% 0 30% 0); }
+      50% { clip-path: inset(0 0 0 0); }
+      100% { clip-path: inset(0 0 0 0); }
+    }
+
+    .mvp-reveal.just-revealed .mvp-revealed-content {
+      animation: glitchReveal 0.5s steps(5) forwards, revealContent 0.5s ease;
+    }
+
+    .mvp-master {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 2px solid #8b6914;
+    }
+
+    .mvp-master .mvp-avatar {
+      width: 100px;
+      height: 100px;
+      border: 3px solid #e8d48b;
+      box-shadow: 0 0 30px rgba(232, 212, 139, 0.6);
+    }
+
+    .mvp-master .mvp-name {
+      font-size: 1.5rem;
+      color: #fff;
+    }
+
+    .moment-list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .moment-list li {
+      padding: 0.4rem 0;
+      border-bottom: 1px solid #2c1810;
+      color: #d4c09a;
+    }
+
+    .moment-list li::before {
+      content: "✦ ";
+      color: #c9a84c;
+    }
+
+    .encerramento {
+      background: rgba(15, 8, 4, 0.9);
+      border: 2px solid #8b6914;
+      padding: 1.5rem;
+      margin-top: 2rem;
+      font-style: italic;
+      color: #e8d48b;
+      text-align: center;
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+
+    .spark {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: #e8d48b;
+      border-radius: 50%;
+      pointer-events: none;
+      animation: sparkFloat 1s ease-out forwards;
+      box-shadow: 0 0 6px rgba(232, 212, 139, 0.8);
+    }
+
+    @keyframes sparkFloat {
+      0% { opacity: 1; transform: translate(0, 0) scale(1); }
+      100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(0); }
+    }
+
+    .honor-item {
+      background: rgba(15, 8, 4, 0.7);
+      border-left: 3px solid #c9a84c;
+      padding: 0.7rem 1rem;
+      margin-bottom: 0.6rem;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+
+    .honor-item:hover {
+      background: rgba(20, 12, 6, 0.9);
+      border-left-color: #e8d48b;
+    }
+
+    .honor-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .honor-name {
+      color: #e8d48b;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    .honor-change {
+      color: #4a7c2a;
+      font-weight: bold;
+      font-size: 0.9rem;
+      background: rgba(10, 8, 4, 0.7);
+      padding: 0.1rem 0.6rem;
+      border-radius: 3px;
+      border: 1px solid #2a4a1a;
+      white-space: nowrap;
+    }
+
+    .honor-desc {
+      color: #a89870;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      padding-left: 0.5rem;
+    }
+
+    .nea-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0.5rem;
+      margin: 0.5rem 0;
+    }
+
+    .nea-item {
+      background: rgba(15, 8, 4, 0.7);
+      padding: 0.4rem 0.8rem;
+      border-left: 2px solid #8b6914;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nea-item .name {
+      color: #a89870;
+    }
+
+    .nea-item .value {
+      color: #e8d48b;
+      font-weight: bold;
+    }
+
+    .nea-item .change {
+      color: #4a7c2a;
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 600px) {
+      body { padding: 1rem; }
+      .main-container { padding: 1.5rem; }
+      .archive-header h1 { font-size: 1.4rem; }
+      .mvp-revealed-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      .nea-grid {
+        grid-template-columns: 1fr;
+      }
+      .honor-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="main-container">
+    <a href="../index.html" class="back-btn">◄ Retornar às Crônicas</a>
+
+    <!-- CABEÇALHO DO ARQUIVO -->
+    <div class="archive-header">
+      <h1>━━━ THE LAST DAWN ━━━</h1>
+      <div style="font-family: 'Cinzel', serif; font-size: 1.1rem; color: #c9a84c;">CRÔNICA XV</div>
+      <div class="status-line">
+        STATUS: <span style="color: #4a7c2a;">LIBERADO</span> &nbsp;|&nbsp;
+        CLASSIFICAÇÃO: <span style="color: #c9a84c;">NÍVEL 3</span> &nbsp;|&nbsp;
+        DATA: <span style="color: #e8d48b;">12º dia do 7º mês</span>
+      </div>
+    </div>
+
+    <!-- TÍTULO DA SESSÃO -->
+    <div class="session-title-section">
+      <h2>🔱 REGISTRO OFICIAL — SESSÃO XV</h2>
+      <div class="subtitle">"A Quinta Tempestade"</div>
+      <div class="epigraph">
+        "Toda grande descoberta cobra um preço. Algumas cobram memórias. Outras... cobram certezas."
+      </div>
+    </div>
+
+    <!-- XP DE OFÍCIO -->
+    <div class="info-card">
+      <h3>🧮 XP DE OFÍCIO — O QUE CADA UM FEZ</h3>
+
+      <p><span class="highlight">⚕️ Elion — Médico / Clérigo</span></p>
+      <p>• Estudou Anatomia das Serpentes do Deserto (+40 XP)</p>
+      <p>• Estudou Arte da Orientação Estelar (+20 XP)</p>
+      <p>• Conectou a Árvore Impossível aos registros da Quinta Tempestade</p>
+      <p>• Compartilhou praticamente todas as descobertas com Barn e com o grupo</p>
+      <p>→ <span class="highlight">+60 XP</span> | 550 → <strong>610 XP (610/650)</strong></p>
+
+      <br>
+      <p><span class="highlight">🏹 Caçador — Rastreador</span></p>
+      <p>• Foi o primeiro a despertar</p>
+      <p>• Identificou imediatamente a ausência completa de rastros na praia</p>
+      <p>• Estudou As Cem Formas da Resistência (+40 XP)</p>
+      <p>• Estudou os registros de Solânia (+10 XP)</p>
+      <p>→ <span class="highlight">+50 XP</span> | 360 → <strong>410 XP</strong></p>
+
+      <br>
+      <p><span class="highlight">🌿 Evangeline — Herbalista / Alquimista</span></p>
+      <p>• Estudou A Quinta Tempestade</p>
+      <p>• Compartilhou conhecimentos com o grupo</p>
+      <p>→ <span class="highlight">+10 XP</span> | 370 → <strong>380 XP</strong></p>
+
+      <br>
+      <p><span class="highlight">🐊 Crocotop — Pescador</span></p>
+      <p>• Estudou Manual das Grandes Caravanas (+20 XP)</p>
+      <p>→ <span class="highlight">+20 XP</span> | 180 → <strong>200 XP</strong></p>
+
+      <br>
+      <p><span class="highlight">🍳 Eren — Cozinheiro</span></p>
+      <p>• Estudou Especiarias dos Cem Oásis (+40 XP)</p>
+      <p>• Estudou Código dos Mercadores Livres (+20 XP)</p>
+      <p>• Estudou O Milênio Sob as Dunas (+10 XP)</p>
+      <p>• Analisou profundamente o Diário de Thar-Zul</p>
+      <p>→ <span class="highlight">+70 XP</span> | 90 → <strong>160 XP</strong></p>
+
+      <br>
+      <p><span class="highlight">⚔️ Dravon — Mercenário</span></p>
+      <p>• Estudou Criação de Montarias (+20 XP)</p>
+      <p>• Estudou Sobrevivência Entre as Areias (+20 XP)</p>
+      <p>• Estudou O Coração Enterrado (+10 XP)</p>
+      <p>• Identificou antigas Runas Ifritianas presentes no Diário de Thar-Zul</p>
+      <p>→ <span class="highlight">+50 XP</span> | 20 → <strong>70 XP</strong></p>
+
+      <br>
+      <p><span class="highlight">🔨 Kael — Ferreiro / Técnico de Forja-Viva</span></p>
+      <p>• Não participou das pesquisas</p>
+      <p>→ <span class="highlight">+0 XP</span> | 40 → <strong>40 XP</strong></p>
+    </div>
+
+    <!-- N.E.A. -->
+    <div class="info-card">
+      <h3>📊 N.E.A. — EXPOSIÇÃO ARCANA</h3>
+      <p>O contato com a Árvore Impossível, somado ao estudo de tomos proibidos, aumentou significativamente a Exposição Arcana dos personagens.</p>
+
+      <div class="nea-grid">
+        <div class="nea-item">
+          <span class="name">⚕️ Elion</span>
+          <span class="value">34,9% <span class="change">(+1,9%)</span></span>
+        </div>
+        <div class="nea-item">
+          <span class="name">🏹 Caçador</span>
+          <span class="value">34,9% <span class="change">(+0,9%)</span></span>
+        </div>
+        <div class="nea-item">
+          <span class="name">🌿 Evangeline</span>
+          <span class="value">33,5% <span class="change">(+0,5%)</span></span>
+        </div>
+        <div class="nea-item">
+          <span class="name">🐊 Crocotop</span>
+          <span class="value">41,1% <span class="change">(+0,2%)</span></span>
+        </div>
+        <div class="nea-item">
+          <span class="name">🍳 Eren</span>
+          <span class="value">42,3% <span class="change">(+0,9%)</span></span>
+        </div>
+        <div class="nea-item">
+          <span class="name">⚔️ Dravon</span>
+          <span class="value">??,?% <span class="change">(+0,9%)</span></span>
+        </div>
+        <div class="nea-item">
+          <span class="name">🔨 Kael</span>
+          <span class="value">Sem alteração</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- HONRA -->
+    <div class="info-card">
+      <h3>🛡️ HONRA — AÇÕES DA SESSÃO</h3>
+
+      <div class="honor-item">
+        <div class="honor-header">
+          <span class="honor-name">⚕️ Elion</span>
+          <span class="honor-change">+2% → 100% (Capado)</span>
+        </div>
+        <div class="honor-desc">• Compartilhou todas as descobertas • Explicou integralmente os acontecimentos de Greyfield a Barn • Conduziu boa parte da pesquisa</div>
+      </div>
+
+      <div class="honor-item">
+        <div class="honor-header">
+          <span class="honor-name">🏹 Caçador</span>
+          <span class="honor-change">+2% → 100% (Capado)</span>
+        </div>
+        <div class="honor-desc">• Protegeu o grupo durante o despertar • Compartilhou descobertas históricas sobre Solânia</div>
+      </div>
+
+      <div class="honor-item">
+        <div class="honor-header">
+          <span class="honor-name">🍳 Eren</span>
+          <span class="honor-change">+2% → 46%</span>
+        </div>
+        <div class="honor-desc">• Compartilhou todo o conhecimento adquirido • Auxiliou na análise do Diário de Thar-Zul</div>
+      </div>
+
+      <div class="honor-item">
+        <div class="honor-header">
+          <span class="honor-name">🌿 Evangeline</span>
+          <span class="honor-change">+1% → 97%</span>
+        </div>
+        <div class="honor-desc">• Cooperou nas pesquisas</div>
+      </div>
+
+      <div class="honor-item">
+        <div class="honor-header">
+          <span class="honor-name">⚔️ Dravon</span>
+          <span class="honor-change">+1% → 1%</span>
+        </div>
+        <div class="honor-desc">• Reconheceu Runas Ifritianas extremamente antigas</div>
+      </div>
+
+      <div class="honor-item">
+        <div class="honor-header">
+          <span class="honor-name">🐊 Crocotop</span>
+          <span class="honor-change">+1% → 45%</span>
+        </div>
+        <div class="honor-desc">• Participou da investigação coletiva</div>
+      </div>
+
+      <div class="honor-item" style="border-left-color: #6b4c2a;">
+        <div class="honor-header">
+          <span class="honor-name" style="color: #8b6914;">🔨 Kael</span>
+          <span class="honor-change" style="color: #6b4c2a;">Sem alteração</span>
+        </div>
+        <div class="honor-desc" style="color: #6b4c2a;">• Não participou das pesquisas</div>
+      </div>
+    </div>
+
+    <!-- CORRUPÇÃO -->
+    <div class="info-card">
+      <h3>☠️ CORRUPÇÃO</h3>
+      <p>Nenhuma alteração.</p>
+      <p>O grupo não realizou ações que aumentassem nem reduzissem Corrupção.</p>
+    </div>
+
+    <!-- DESCOBERTAS -->
+    <div class="info-card">
+      <h3>📚 DESCOBERTAS IMPORTANTES</h3>
+      <ul class="moment-list">
+        <li>Greyfield desapareceu completamente</li>
+        <li>Apenas algumas horas se passaram para o grupo</li>
+        <li>Seis meses transcorreram no restante do continente</li>
+        <li>A Árvore Impossível continua existindo em Zaharam</li>
+        <li>A árvore não possui mana</li>
+        <li>A árvore não possui essência vital</li>
+        <li>A árvore manifesta o fenômeno conhecido como <span class="highlight">Silêncio Arcano</span></li>
+        <li>O rádio de Greyfield sobreviveu ao colapso da estação</li>
+        <li>Fenômenos semelhantes começaram a surgir por todo o continente</li>
+        <li>Novas Rupturas apareceram em diversos reinos</li>
+        <li>Algumas Rupturas trouxeram fortalezas desconhecidas</li>
+        <li>Outras trouxeram cidades inteiras</li>
+        <li>Outras revelaram bibliotecas impossíveis</li>
+        <li>O antigo baú da família Clant finalmente se abriu</li>
+        <li>Todas as páginas encontradas durante a campanha pertencem ao <span class="highlight">Grimório Ardente de Thar-Zul Ravengar</span></li>
+        <li>Os capítulos finais do Grimório foram arrancados</li>
+        <li>A Profecia parece tratar de algo muito maior que o fim do mundo</li>
+        <li>O Diário de Thar-Zul aparenta ser um manuscrito original</li>
+        <li>Dravon identificou <span class="highlight">Runas Ifritianas</span> extremamente antigas presentes no diário</li>
+        <li>Tibério está diretamente ligado aos acontecimentos envolvendo Greyfield</li>
+        <li>Pessoas de diferentes reinos começaram a compartilhar sonhos com a mesma floresta</li>
+        <li>O <span class="highlight">Conselho dos Sete</span> foi oficialmente convocado</li>
+        <li>Os aventureiros tornaram-se as únicas testemunhas vivas da Estação Greyfield</li>
+      </ul>
+    </div>
+
+    <!-- MVPs DA SESSÃO -->
+    <div class="info-card">
+      <h3>👑 MVPs DA SESSÃO</h3>
+      <p style="color: #8b6914; font-size: 0.85rem; margin-bottom: 1rem; font-style: italic;">✦ Toque nos selos para revelar os heróis</p>
+
+      <div class="mvp-container">
+
+        <!-- MVP de Pesquisa - EREN -->
+        <div class="mvp-reveal" onclick="revealMVP(this)" data-mvp="pesquisa">
+          <div class="mvp-hidden">
+            <div class="mvp-question-mark">?</div>
+            <div>
+              <div class="mvp-label-hidden">MVP DE PESQUISA</div>
+              <div class="mvp-category-hidden">[Toque para revelar]</div>
+            </div>
+          </div>
+          <div class="mvp-revealed-content">
+            <div class="mvp-avatar">
+              <img src="../assets/img/eren.png" alt="Eren">
+            </div>
+            <div class="mvp-info-revealed">
+              <div class="mvp-name">Eren</div>
+              <div class="mvp-category">📜 MVP de Pesquisa</div>
+              <div class="mvp-description">
+                • Analisou profundamente o Diário de Thar-Zul<br>
+                • Compartilhou grande parte das descobertas<br>
+                • Auxiliou na interpretação dos documentos históricos
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MVP de Raciocínio - ELION -->
+        <div class="mvp-reveal" onclick="revealMVP(this)" data-mvp="raciocinio">
+          <div class="mvp-hidden">
+            <div class="mvp-question-mark">?</div>
+            <div>
+              <div class="mvp-label-hidden">MVP DE RACIOCÍNIO</div>
+              <div class="mvp-category-hidden">[Toque para revelar]</div>
+            </div>
+          </div>
+          <div class="mvp-revealed-content">
+            <div class="mvp-avatar">
+              <img src="../assets/img/elion.png" alt="Elion">
+            </div>
+            <div class="mvp-info-revealed">
+              <div class="mvp-name">Elion</div>
+              <div class="mvp-category">🧠 MVP de Raciocínio</div>
+              <div class="mvp-description">
+                • Reconheceu imediatamente os sinais da Quinta Tempestade<br>
+                • Relacionou a Árvore Impossível aos registros proibidos<br>
+                • Explicou todos os acontecimentos para Barn Clant
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MVP de Descobertas - CAÇADOR -->
+        <div class="mvp-reveal" onclick="revealMVP(this)" data-mvp="descobertas">
+          <div class="mvp-hidden">
+            <div class="mvp-question-mark">?</div>
+            <div>
+              <div class="mvp-label-hidden">MVP DE DESCOBERTAS</div>
+              <div class="mvp-category-hidden">[Toque para revelar]</div>
+            </div>
+          </div>
+          <div class="mvp-revealed-content">
+            <div class="mvp-avatar">
+              <img src="../assets/img/caçador.png" alt="Caçador">
+            </div>
+            <div class="mvp-info-revealed">
+              <div class="mvp-name">Caçador</div>
+              <div class="mvp-category">🔎 MVP de Descobertas</div>
+              <div class="mvp-description">
+                • Foi o primeiro a despertar<br>
+                • Encontrou a Árvore Impossível<br>
+                • Percebeu a ausência completa de rastros<br>
+                • Contribuiu com informações históricas sobre Solânia
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MVP DA SESSÃO - ELION -->
+        <div class="mvp-reveal mvp-master" onclick="revealMVP(this)" data-mvp="master">
+          <div class="mvp-hidden">
+            <div class="mvp-question-mark" style="font-size:3rem;">?</div>
+            <div>
+              <div class="mvp-label-hidden" style="font-size:1.1rem;">👑 MVP DA SESSÃO</div>
+              <div class="mvp-category-hidden">[Toque para revelar]</div>
+            </div>
+          </div>
+          <div class="mvp-revealed-content">
+            <div class="mvp-avatar" style="width:100px; height:100px;">
+              <img src="../assets/img/elion.png" alt="Elion">
+            </div>
+            <div class="mvp-info-revealed">
+              <div class="mvp-name" style="font-size:1.5rem;">Elion</div>
+              <div class="mvp-category">👑 MVP da Sessão</div>
+              <div class="mvp-description">
+                • Foi quem realizou o maior número de conexões entre Greyfield, Tibério, Solânia e a Quinta Tempestade<br>
+                • Identificou o fenômeno do Silêncio Arcano<br>
+                • Liderou a análise dos documentos proibidos<br>
+                • Organizou e transmitiu todas as informações para Barn Clant<br>
+                • Tornou compreensível um fenômeno que ultrapassa todo o conhecimento mágico conhecido
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- MOMENTOS MARCANTES -->
+    <div class="info-card">
+      <h3>🎬 MOMENTOS MARCANTES</h3>
+      <ul class="moment-list">
+        <li>O despertar na praia após Greyfield</li>
+        <li>O silêncio absoluto antes da consciência retornar</li>
+        <li>A descoberta da Árvore Impossível</li>
+        <li>A constatação de que a árvore não possui mana nem vida</li>
+        <li>A revelação de que seis meses se passaram no mundo</li>
+        <li>O reencontro com Barn Clant</li>
+        <li>A revelação das novas Rupturas espalhadas pelo continente</li>
+        <li>A abertura do antigo baú da família Clant após séculos</li>
+        <li>A descoberta de que todas as páginas pertencem ao mesmo Grimório Ardente</li>
+        <li>A leitura dos Tomos Proibidos na Grande Biblioteca Solar</li>
+        <li>A confirmação de que o Diário de Thar-Zul parece ser original</li>
+        <li>Dravon identificando Runas Ifritianas ancestrais</li>
+        <li>A chegada dos relatórios dos demais reinos</li>
+        <li>A convocação oficial do Conselho dos Sete</li>
+      </ul>
+    </div>
+
+    <!-- ENCERRAMENTO -->
+    <div class="encerramento">
+      <p>📖 <strong>ENCERRAMENTO</strong></p>
+      <br>
+      <p><em>Greyfield desapareceu.</em></p>
+      <p><em>Mas seu desaparecimento não encerrou o mistério.</em></p>
+      <p><em>Apenas o espalhou pelo continente.</em></p>
+      <br>
+      <p><em>Enquanto novos reinos relatam rupturas impossíveis...</em></p>
+      <p><em>antigos livros voltam a ser abertos.</em></p>
+      <p><em>antigas profecias voltam a ser lidas.</em></p>
+      <p><em>e antigos nomes voltam a ser pronunciados.</em></p>
+      <br>
+      <p><em>Pela primeira vez...</em></p>
+      <p><em>os aventureiros compreendem que Greyfield nunca foi o verdadeiro inimigo.</em></p>
+      <p><em>Ela era apenas o primeiro aviso.</em></p>
+      <br>
+      <p><strong style="color: #c9a84c; font-size: 1.3rem;">A Quinta Tempestade começou.</strong></p>
+    </div>
+
+    <div style="text-align:center; margin-top:2rem;">
+      <a href="../index.html" class="back-btn">◄ Retornar às Crônicas</a>
+    </div>
+  </div>
+
+  <script>
+    function revealMVP(element) {
+      if (element.classList.contains('revealed')) {
+        return;
+      }
+
+      element.classList.add('shaking');
+      createSparks(element);
+
+      setTimeout(() => {
+        element.classList.remove('shaking');
+        element.classList.add('revealed');
+        element.classList.add('just-revealed');
+
+        setTimeout(() => {
+          element.classList.remove('just-revealed');
+        }, 500);
+
+        console.log('🔓 Herói revelado: ' + element.getAttribute('data-mvp'));
+      }, 600);
+    }
+
+    function createSparks(element) {
+      const rect = element.getBoundingClientRect();
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      for (let i = 0; i < 12; i++) {
+        const spark = document.createElement('div');
+        spark.className = 'spark';
+
+        const angle = (Math.PI * 2 * i) / 12;
+        const distance = 30 + Math.random() * 40;
+        const tx = Math.cos(angle) * distance;
+        const ty = Math.sin(angle) * distance;
+
+        spark.style.setProperty('--tx', tx + 'px');
+        spark.style.setProperty('--ty', ty + 'px');
+        spark.style.left = centerX + 'px';
+        spark.style.top = centerY + 'px';
+
+        element.appendChild(spark);
+
+        setTimeout(() => {
+          spark.remove();
+        }, 1000);
+      }
+    }
+  </script>
+
+</body>
+
+</html>

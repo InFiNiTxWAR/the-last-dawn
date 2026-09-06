@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THE LAST DAWN · Crônica XIX</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #1a1008;
+      background-image: radial-gradient(ellipse at center, #2c1810 0%, #1a1008 60%, #0d0805 100%);
+      font-family: 'Cormorant Garamond', 'Georgia', serif;
+      color: #f0e2c5;
+      min-height: 100vh;
+      padding: 2rem;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        repeating-linear-gradient(90deg, rgba(50, 30, 10, 0.15) 0px, rgba(50, 30, 10, 0.15) 2px, transparent 2px, transparent 100px),
+        repeating-linear-gradient(0deg, rgba(30, 18, 8, 0.1) 0px, rgba(30, 18, 8, 0.1) 2px, transparent 2px, transparent 80px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .main-container {
+      max-width: 950px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 10;
+      background: linear-gradient(180deg, rgba(44, 24, 16, 0.95) 0%, rgba(30, 18, 10, 0.98) 100%);
+      border: 4px solid #8b6914;
+      border-radius: 12px;
+      box-shadow: 0 0 60px rgba(139, 105, 20, 0.3), inset 0 0 40px rgba(0, 0, 0, 0.8), 0 0 0 2px #6b4c2a, 0 0 0 6px #2c1810;
+      padding: 2.5rem;
+    }
+
+    .back-btn {
+      display: inline-block;
+      color: #e8d48b;
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      padding: 0.5rem 1.2rem;
+      border: 2px solid #8b6914;
+      background: linear-gradient(180deg, #2c1810 0%, #1a0f08 100%);
+      margin-bottom: 1.5rem;
+      transition: 0.3s;
+      letter-spacing: 2px;
+      border-radius: 3px;
+      text-transform: uppercase;
+    }
+
+    .back-btn:hover {
+      background: linear-gradient(180deg, #4a2c1a 0%, #2c1810 100%);
+      box-shadow: 0 0 20px rgba(201, 168, 76, 0.4);
+      color: #fff;
+    }
+
+    .archive-header {
+      border: 3px solid #8b6914;
+      background: linear-gradient(180deg, rgba(60, 35, 20, 0.8) 0%, rgba(30, 18, 10, 0.9) 100%);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      box-shadow: 0 0 25px rgba(139, 105, 20, 0.3), inset 0 0 30px rgba(0, 0, 0, 0.5);
+      border-radius: 8px;
+    }
+
+    .archive-header h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 2rem;
+      color: #c9a84c;
+      text-shadow: 0 0 20px rgba(201, 168, 76, 0.6), 2px 2px 4px rgba(0, 0, 0, 0.8);
+      letter-spacing: 4px;
+      margin-bottom: 0.5rem;
+      font-weight: 900;
+    }
+
+    .archive-header .status-line {
+      font-family: 'Cinzel', serif;
+      color: #e8d48b;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+    }
+
+    .session-title-section {
+      text-align: center;
+      margin: 2rem 0;
+      padding: 1.5rem;
+      border-bottom: 2px solid #8b6914;
+      position: relative;
+    }
+
+    .session-title-section::after {
+      content: "❖";
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1a0f08;
+      padding: 0 1rem;
+      color: #c9a84c;
+      font-size: 1.2rem;
+    }
+
+    .session-title-section h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.8rem;
+      color: #e8d48b;
+      text-shadow: 0 0 10px rgba(201, 168, 76, 0.5);
+    }
+
+    .session-title-section .subtitle {
+      font-size: 1.3rem;
+      color: #c9a84c;
+      font-style: italic;
+      margin-top: 0.5rem;
+    }
+
+    .session-quote {
+      color: #a89870;
+      font-style: italic;
+      text-align: center;
+      margin: 1rem 0;
+      font-size: 0.95rem;
+      padding: 0.8rem;
+      border-left: 2px solid #6b4c2a;
+      border-right: 2px solid #6b4c2a;
+    }
+
+    .info-card {
+      background: rgba(20, 12, 6, 0.8);
+      border: 2px solid #6b4c2a;
+      border-left: 4px solid #c9a84c;
+      padding: 1.2rem 1.5rem;
+      margin: 1.2rem 0;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+      border-radius: 4px;
+    }
+
+    .info-card h3 {
+      font-family: 'Cinzel', serif;
+      color: #c9a84c;
+      font-size: 1.1rem;
+      margin-bottom: 0.8rem;
+      letter-spacing: 1px;
+      border-bottom: 1px solid #6b4c2a;
+      padding-bottom: 0.4rem;
+    }
+
+    .info-card p {
+      line-height: 1.7;
+      margin: 0.3rem 0;
+      color: #d4c09a;
+    }
+
+    .highlight {
+      color: #e8d48b;
+      font-weight: bold;
+    }
+
+    .warning-box {
+      background: rgba(30, 10, 5, 0.8);
+      border: 2px solid #8b1a1a;
+      padding: 1.2rem;
+      margin: 1rem 0;
+      border-radius: 4px;
+    }
+
+    .warning-box h4 {
+      font-family: 'Cinzel', serif;
+      color: #c92a2a;
+      margin-bottom: 0.5rem;
+      letter-spacing: 1px;
+    }
+
+    .warning-box p {
+      color: #d4c09a;
+      line-height: 1.7;
+      margin: 0.3rem 0;
+    }
+
+    .mvp-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      margin-top: 1rem;
+    }
+
+    .mvp-reveal {
+      background: rgba(15, 8, 4, 0.9);
+      border: 2px solid #6b4c2a;
+      border-radius: 6px;
+      padding: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    .mvp-reveal:hover {
+      border-color: #c9a84c;
+      box-shadow: 0 0 15px rgba(201, 168, 76, 0.3);
+    }
+
+    .mvp-reveal.revealed {
+      border-color: #c9a84c;
+      background: rgba(20, 12, 6, 0.9);
+      cursor: default;
+    }
+
+    .mvp-hidden {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .mvp-reveal.revealed .mvp-hidden {
+      display: none;
+    }
+
+    .mvp-question-mark {
+      font-family: 'Cinzel', serif;
+      font-size: 2.5rem;
+      color: #c9a84c;
+      font-weight: bold;
+      text-shadow: 0 0 15px rgba(201, 168, 76, 0.8);
+      animation: pulseQuestion 1.5s infinite;
+      min-width: 60px;
+      text-align: center;
+    }
+
+    @keyframes pulseQuestion {
+      0%, 100% { opacity: 1; text-shadow: 0 0 15px rgba(201, 168, 76, 0.8); }
+      50% { opacity: 0.6; text-shadow: 0 0 30px rgba(201, 168, 76, 1); }
+    }
+
+    .mvp-label-hidden {
+      font-family: 'Cinzel', serif;
+      color: #8b6914;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .mvp-category-hidden {
+      color: #6b4c2a;
+      font-size: 0.8rem;
+      margin-top: 0.2rem;
+      font-style: italic;
+    }
+
+    .mvp-revealed-content {
+      display: none;
+      align-items: center;
+      gap: 1.2rem;
+      animation: revealContent 0.5s ease;
+    }
+
+    .mvp-reveal.revealed .mvp-revealed-content {
+      display: flex;
+    }
+
+    @keyframes revealContent {
+      0% { opacity: 0; transform: translateY(-10px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .mvp-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 3px solid #c9a84c;
+      box-shadow: 0 0 20px rgba(201, 168, 76, 0.5);
+      background: #1a0f08;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .mvp-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      filter: brightness(0.9) saturate(0.9) sepia(0.3);
+    }
+
+    .mvp-info-revealed {
+      flex: 1;
+    }
+
+    .mvp-name {
+      font-family: 'Cinzel', serif;
+      font-size: 1.3rem;
+      color: #e8d48b;
+      font-weight: bold;
+      text-shadow: 0 0 8px rgba(201, 168, 76, 0.5);
+      margin-bottom: 0.3rem;
+    }
+
+    .mvp-category {
+      font-family: 'Cinzel', serif;
+      color: #c9a84c;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.3rem;
+    }
+
+    .mvp-description {
+      color: #d4c09a;
+      font-size: 0.85rem;
+      line-height: 1.4;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+      20%, 40%, 60%, 80% { transform: translateX(4px); }
+    }
+
+    .shaking {
+      animation: shake 0.6s ease-in-out;
+    }
+
+    .moment-list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .moment-list li {
+      padding: 0.4rem 0;
+      border-bottom: 1px solid #2c1810;
+      color: #d4c09a;
+    }
+
+    .moment-list li::before {
+      content: "✦ ";
+      color: #c9a84c;
+    }
+
+    .encerramento {
+      background: rgba(15, 8, 4, 0.9);
+      border: 2px solid #8b6914;
+      padding: 1.5rem;
+      margin-top: 2rem;
+      font-style: italic;
+      color: #e8d48b;
+      text-align: center;
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+
+    .spark {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: #e8d48b;
+      border-radius: 50%;
+      pointer-events: none;
+      animation: sparkFloat 1s ease-out forwards;
+      box-shadow: 0 0 6px rgba(232, 212, 139, 0.8);
+    }
+
+    @keyframes sparkFloat {
+      0% { opacity: 1; transform: translate(0, 0) scale(1); }
+      100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(0); }
+    }
+
+    .nea-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.8rem 0;
+      font-size: 0.9rem;
+    }
+
+    .nea-table th {
+      font-family: 'Cinzel', serif;
+      background: rgba(60, 35, 20, 0.8);
+      color: #c9a84c;
+      padding: 0.5rem;
+      border: 1px solid #6b4c2a;
+    }
+
+    .nea-table td {
+      padding: 0.5rem;
+      border: 1px solid #6b4c2a;
+      color: #d4c09a;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      body { padding: 1rem; }
+      .main-container { padding: 1.5rem; }
+      .archive-header h1 { font-size: 1.4rem; }
+      .mvp-revealed-content { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="main-container">
+  <a href="../index.html" class="back-btn">◄ Retornar às Crônicas</a>
+
+  <!-- CABEÇALHO -->
+  <div class="archive-header">
+    <h1>━━━ THE LAST DAWN ━━━</h1>
+    <div style="font-family: 'Cinzel', serif; font-size: 1.1rem; color: #c9a84c;">CRÔNICA XIX</div>
+    <div class="status-line">
+      STATUS: <span style="color: #4a7c2a;">LIBERADO</span> &nbsp;|&nbsp;
+      CLASSIFICAÇÃO: <span style="color: #c92a2a;">NÍVEL 3</span> &nbsp;|&nbsp;
+      DATA: <span style="color: #e8d48b;">18º dia do 8º mês</span>
+    </div>
+  </div>
+
+  <!-- TÍTULO -->
+  <div class="session-title-section">
+    <h2>🔱 REGISTRO OFICIAL — SESSÃO XIX</h2>
+    <div class="subtitle">"A Verdade Entre Mentiras"</div>
+  </div>
+
+  <div class="session-quote">
+    "Uma cidade pode esconder seus segredos. Mas o sangue sempre encontra uma maneira de revelá-los."
+  </div>
+
+  <!-- XP DE OFÍCIO -->
+  <div class="info-card">
+    <h3>⚔️ EXPERIÊNCIA DE OFÍCIO</h3>
+
+    <p><span class="highlight">🩺 Elion — Médico</span></p>
+    <p>+20 XP | 900 → <strong>920 XP</strong> — Ofício: <strong>Mestre</strong></p>
+    <p style="font-size:0.85rem; color:#a89870;">• Atendimento médico durante a sessão, costurando o ferimento de Crocotop</p>
+
+    <br>
+    <p><span class="highlight">🏹 Caçador — Rastreador</span></p>
+    <p>+0 XP | 650 XP — Ofício: <strong>Trabalhador</strong></p>
+
+    <br>
+    <p><span class="highlight">🌿 Evangeline — Herbalista/Alquimista</span></p>
+    <p>+0 XP | 600 XP — Ofício: <strong>Trabalhador</strong></p>
+
+    <br>
+    <p><span class="highlight">🐊 Crocotop — Pescador</span></p>
+    <p>+0 XP | 450 XP — Ofício: <strong>Trabalhador</strong></p>
+
+    <br>
+    <p><span class="highlight">🍳 Eren — Cozinheiro</span></p>
+    <p>+0 XP | 360 XP — Ofício: <strong>Trabalhador</strong></p>
+
+    <br>
+    <p><span class="highlight">⚔️ Dravon — Mercenário</span></p>
+    <p>+0 XP | 300 XP — Ofício: <strong>Estagiário</strong></p>
+
+    <br>
+    <p><span class="highlight">🔨 Kael — Ferreiro</span></p>
+    <p>+0 XP | 240 XP — Ofício: <strong>Estagiário</strong></p>
+  </div>
+
+  <!-- NEA -->
+  <div class="info-card">
+    <h3>🧠 NEA — NÍVEL DE EXPOSIÇÃO ARCANA</h3>
+    <p>Nenhuma alteração de NEA durante a sessão.</p>
+    <table class="nea-table">
+      <tr><th>Personagem</th><th>NEA</th></tr>
+      <tr><td>🩺 Elion</td><td>40,0%</td></tr>
+      <tr><td>🏹 Caçador</td><td>39,0%</td></tr>
+      <tr><td>🌿 Evangeline</td><td>42,0%</td></tr>
+      <tr><td>🐊 Crocotop</td><td>45,0%</td></tr>
+      <tr><td>🍳 Eren</td><td>45,6%</td></tr>
+      <tr><td>⚔️ Dravon</td><td>31,0%</td></tr>
+      <tr><td>🔨 Kael</td><td>30,0%</td></tr>
+    </table>
+  </div>
+
+  <!-- HONRA -->
+  <div class="info-card">
+    <h3>⚖️ HONRA</h3>
+
+    <p><span class="highlight">🩺 Elion</span> — 100% → <strong style="color:#c92a2a;">80%</strong></p>
+    <p style="font-size:0.85rem; color:#a89870;">• A morte de ~30 guardas inocentes de Sylvanora. Variação: −20%</p>
+
+    <br>
+    <p><span class="highlight">🍳 Eren</span> — 55% → <strong style="color:#c92a2a;">35%</strong></p>
+    <p style="font-size:0.85rem; color:#a89870;">• Atacou o Mapeador pelas costas. Variação: −20%</p>
+
+    <br>
+    <p><span class="highlight">🏹 Caçador</span> — 100% → 100% (Sem alteração)</p>
+    <p><span class="highlight">🌿 Evangeline</span> — 100% → 100% (Sem alteração)</p>
+    <p><span class="highlight">🐊 Crocotop</span> — 52% → 52% (Sem alteração)</p>
+    <p><span class="highlight">⚔️ Dravon</span> — 7% → 7% (Sem alteração)</p>
+    <p><span class="highlight">🔨 Kael</span> — 60% → 60% (Sem alteração)</p>
+  </div>
+
+  <!-- CORRUPÇÃO -->
+  <div class="info-card">
+    <h3>☠️ CORRUPÇÃO</h3>
+    <p>Nenhum personagem apresentou alteração de Corrupção durante a sessão.</p>
+  </div>
+
+  <!-- FERIMENTO -->
+  <div class="warning-box">
+    <h4>🩸 FERIMENTO — CROCOTOP</h4>
+    <p>Durante o confronto, Crocotop foi atacado violentamente pelo enorme leopardo.</p>
+    <p>O ataque abriu um ferimento profundo em suas costas.</p>
+    <p>Após a fuga do animal, Elion realizou atendimento médico e costurou o ferimento manualmente.</p>
+    <br>
+    <p><strong>Estado atual:</strong></p>
+    <p>• Ferimento estabilizado</p>
+    <p>• Sangramento controlado</p>
+    <p>• Sem risco imediato de morte</p>
+    <p>• Dor e sensibilidade permanecem</p>
+    <p>• A cicatrização completa ainda levará tempo</p>
+  </div>
+
+  <!-- DESCOBERTAS -->
+  <div class="info-card">
+    <h3>📚 DESCOBERTAS IMPORTANTES</h3>
+    <p>• Os sinos de Sylvanora anunciaram a chegada de um grupo de aventureiros</p>
+    <p>• Os guardas inicialmente atacaram os aventureiros</p>
+    <p>• Os guardas reconheceram a presença do grupo e ordenaram que atacassem</p>
+    <p>• Elion tentou impedir o conflito e propôs uma conversa</p>
+    <p>• O líder dos aventureiros concordou</p>
+    <p>• Antes que a conversa começasse, um elfo matou o líder com uma flecha na cabeça</p>
+    <p>• Os atacantes eram elfos de Sylvanora</p>
+    <p>• O confronto recomeçou após o assassinato do líder</p>
+    <p>• Eren utilizou teleporte para atacar o arqueiro</p>
+    <p>• O arqueiro ficou gravemente ferido e posteriormente morreu</p>
+    <p>• Eren atacou o Mapeador pelas costas</p>
+    <p>• O Mapeador morreu devido aos ferimentos</p>
+    <p>• Elion se teleportou para recuperar os documentos</p>
+    <p>• Os guardas acusaram Elion de ser um traidor</p>
+    <p>• Aproximadamente 30 guardas foram mortos por Elion</p>
+    <p>• Caçador tentou diversas vezes interromper o combate</p>
+    <p>• Um dos adversários de Caçador morreu após se ferir com a própria espada</p>
+    <p>• Evangeline foi atacada por um enorme leopardo</p>
+    <p>• Crocotop também enfrentou o animal</p>
+    <p>• Evangeline tentou ajudar mesmo enquanto era atacada</p>
+    <p>• Crocotop tentou fazer o leopardo desistir</p>
+    <p>• O leopardo acabou fugindo</p>
+    <p>• Crocotop ficou com um ferimento profundo nas costas</p>
+    <p>• Elion realizou os primeiros cuidados médicos</p>
+    <p>• Elion costurou o ferimento de Crocotop</p>
+    <p>• O grupo recuperou documentos importantes</p>
+    <p>• A guarda real percebeu a movimentação dos aventureiros</p>
+    <p>• O grupo conseguiu escapar pela estalagem</p>
+    <p>• Os documentos agora estão nas mãos do grupo</p>
+  </div>
+
+  <!-- MVPs -->
+  <div class="info-card">
+    <h3>🏆 DESTAQUES DA SESSÃO</h3>
+    <p style="color: #8b6914; font-size: 0.85rem; margin-bottom: 1rem; font-style: italic;">✦ Toque nos selos para revelar os heróis</p>
+
+    <div class="mvp-container">
+      <!-- MVP 1º -->
+      <div class="mvp-reveal" onclick="revealMVP(this)" data-mvp="primeiro">
+        <div class="mvp-hidden">
+          <div class="mvp-question-mark">?</div>
+          <div>
+            <div class="mvp-label-hidden">🥇 1º LUGAR — MVP</div>
+            <div class="mvp-category-hidden">[Toque para revelar]</div>
+          </div>
+        </div>
+        <div class="mvp-revealed-content">
+          <div class="mvp-avatar">
+            <img src="../assets/img/eren.png" alt="Eren">
+          </div>
+          <div class="mvp-info-revealed">
+            <div class="mvp-name">Eren</div>
+            <div class="mvp-category">🥇 MVP da Sessão</div>
+            <div class="mvp-description">
+              • Participação extremamente ativa no confronto<br>
+              • Ataques decisivos com teleporte estratégico<br>
+              • Eliminou ameaças importantes<br>
+              • Contribuiu para a recuperação dos documentos
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MVP 2º -->
+      <div class="mvp-reveal" onclick="revealMVP(this)" data-mvp="segundo">
+        <div class="mvp-hidden">
+          <div class="mvp-question-mark">?</div>
+          <div>
+            <div class="mvp-label-hidden">🥈 2º LUGAR</div>
+            <div class="mvp-category-hidden">[Toque para revelar]</div>
+          </div>
+        </div>
+        <div class="mvp-revealed-content">
+          <div class="mvp-avatar">
+            <img src="../assets/img/elion.png" alt="Elion">
+          </div>
+          <div class="mvp-info-revealed">
+            <div class="mvp-name">Elion</div>
+            <div class="mvp-category">🥈 Segundo Lugar</div>
+            <div class="mvp-description">
+              • Tentou impedir o conflito<br>
+              • Recuperou os documentos<br>
+              • Enfrentou os guardas de Sylvanora<br>
+              • Costurou o ferimento de Crocotop
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DESTAQUE -->
+      <div class="mvp-reveal" onclick="revealMVP(this)" data-mvp="destaque">
+        <div class="mvp-hidden">
+          <div class="mvp-question-mark">?</div>
+          <div>
+            <div class="mvp-label-hidden">⭐ DESTAQUE DA SESSÃO</div>
+            <div class="mvp-category-hidden">[Toque para revelar]</div>
+          </div>
+        </div>
+        <div class="mvp-revealed-content">
+          <div class="mvp-avatar">
+            <img src="../assets/img/crocotop.png" alt="Crocotop">
+          </div>
+          <div class="mvp-info-revealed">
+            <div class="mvp-name">Crocotop</div>
+            <div class="mvp-category">⭐ Destaque da Sessão</div>
+            <div class="mvp-description">
+              • Gravemente ferido pelo leopardo<br>
+              • Continuou tentando impedir que a criatura fosse morta<br>
+              • Tentativa de resolver sem eliminar o animal
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MOMENTOS MARCANTES -->
+  <div class="info-card">
+    <h3>🎬 MOMENTOS MARCANTES</h3>
+    <ul class="moment-list">
+      <li>Os sinos de Sylvanora tocando</li>
+      <li>A chegada dos aventureiros humanos</li>
+      <li>Os guardas reconhecendo a presença do grupo</li>
+      <li>Elion tentando impedir o combate</li>
+      <li>O líder aceitando conversar</li>
+      <li>O assassinato do líder por uma flecha élfica</li>
+      <li>A revelação de que os atacantes eram elfos de Sylvanora</li>
+      <li>Eren se teleportando para trás do arqueiro</li>
+      <li>Eren atacando o Mapeador pelas costas</li>
+      <li>Elion recuperando os documentos</li>
+      <li>Os guardas chamando Elion de "traidor"</li>
+      <li>Elion enfrentando aproximadamente 30 guardas</li>
+      <li>Caçador tentando interromper o combate</li>
+      <li>O inimigo de Caçador se matando com a própria espada</li>
+      <li>O enorme leopardo atacando Evangeline e Crocotop</li>
+      <li>Crocotop tentando fazer o animal desistir</li>
+      <li>O leopardo fugindo</li>
+      <li>Crocotop ficando com um enorme ferimento nas costas</li>
+      <li>Elion costurando o ferimento de Crocotop</li>
+      <li>O grupo recuperando os documentos</li>
+      <li>A guarda real percebendo a fuga</li>
+      <li>O grupo escapando pela estalagem</li>
+    </ul>
+  </div>
+
+  <!-- ENCERRAMENTO -->
+  <div class="encerramento">
+    <p>📖 <strong>ENCERRAMENTO</strong></p>
+    <br>
+    <p><em>Sylvanora não recebeu os aventureiros.</em></p>
+    <p><em>Recebeu uma guerra.</em></p>
+    <br>
+    <p><em>Uma conversa foi interrompida por uma flecha.</em></p>
+    <p><em>Um líder morreu.</em></p>
+    <p><em>E então o sangue tomou as ruas.</em></p>
+    <br>
+    <p><em>Eren atacou pelas sombras.</em></p>
+    <p><em>Caçador tentou impedir a violência.</em></p>
+    <p><em>Evangeline tentou ajudar.</em></p>
+    <p><em>Crocotop tentou fazer o monstro desistir.</em></p>
+    <br>
+    <p><em>E Elion...</em></p>
+    <p><em>Elion matou.</em></p>
+    <p><em>Trinta guardas.</em></p>
+    <p><em>Trinta vidas.</em></p>
+    <br>
+    <p><em>E depois do massacre, voltou a fazer aquilo que sempre fez.</em></p>
+    <p><em>Curar.</em></p>
+    <br>
+    <p><em>Suas mãos que haviam causado morte agora costuravam as costas feridas de Crocotop.</em></p>
+    <br>
+    <p><em>Enquanto isso, os documentos finalmente estavam seguros.</em></p>
+    <p><em>E dentro deles...</em></p>
+    <p><em>Talvez estivesse a verdade.</em></p>
+    <br>
+    <p><em>Mas em Sylvanora, a verdade não parecia ser algo que alguém queria que eles descobrissem.</em></p>
+    <br>
+    <p style="font-size: 1.3rem; color: #c9a84c;"><strong>A Quinta Tempestade continua.</strong></p>
+  </div>
+
+  <div style="text-align:center; margin-top:2rem;">
+    <a href="../index.html" class="back-btn">◄ Retornar às Crônicas</a>
+  </div>
+</div>
+
+<script>
+  function revealMVP(element) {
+    if (element.classList.contains('revealed')) {
+      return;
+    }
+
+    element.classList.add('shaking');
+    createSparks(element);
+
+    setTimeout(() => {
+      element.classList.remove('shaking');
+      element.classList.add('revealed');
+      element.classList.add('just-revealed');
+
+      setTimeout(() => {
+        element.classList.remove('just-revealed');
+      }, 500);
+
+      console.log('🔓 Herói revelado: ' + element.getAttribute('data-mvp'));
+    }, 600);
+  }
+
+  function createSparks(element) {
+    const rect = element.getBoundingClientRect();
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    for (let i = 0; i < 12; i++) {
+      const spark = document.createElement('div');
+      spark.className = 'spark';
+
+      const angle = (Math.PI * 2 * i) / 12;
+      const distance = 30 + Math.random() * 40;
+      const tx = Math.cos(angle) * distance;
+      const ty = Math.sin(angle) * distance;
+
+      spark.style.setProperty('--tx', tx + 'px');
+      spark.style.setProperty('--ty', ty + 'px');
+      spark.style.left = centerX + 'px';
+      spark.style.top = centerY + 'px';
+
+      element.appendChild(spark);
+
+      setTimeout(() => {
+        spark.remove();
+      }, 1000);
+    }
+  }
+</script>
+
+</body>
+</html>

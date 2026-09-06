@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THE LAST DAWN · O Salto Temporal</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #1a1008;
+      background-image: radial-gradient(ellipse at center, #2c1810 0%, #1a1008 60%, #0d0805 100%);
+      font-family: 'Cormorant Garamond', 'Georgia', serif;
+      color: #f0e2c5;
+      min-height: 100vh;
+      padding: 2rem;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .main-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 10;
+      background: linear-gradient(180deg, rgba(44, 24, 16, 0.95) 0%, rgba(30, 18, 10, 0.98) 100%);
+      border: 4px solid #8b6914;
+      border-radius: 12px;
+      box-shadow: 0 0 60px rgba(139, 105, 20, 0.3), inset 0 0 40px rgba(0, 0, 0, 0.8);
+      padding: 2.5rem;
+    }
+
+    .back-btn {
+      display: inline-block;
+      color: #e8d48b;
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      padding: 0.5rem 1.2rem;
+      border: 2px solid #8b6914;
+      background: linear-gradient(180deg, #2c1810 0%, #1a0f08 100%);
+      margin-bottom: 1.5rem;
+      transition: 0.3s;
+      letter-spacing: 2px;
+      border-radius: 3px;
+      text-transform: uppercase;
+    }
+
+    .back-btn:hover {
+      background: linear-gradient(180deg, #4a2c1a 0%, #2c1810 100%);
+      box-shadow: 0 0 20px rgba(201, 168, 76, 0.4);
+      color: #fff;
+    }
+
+    .archive-header {
+      border: 3px solid #8b6914;
+      background: linear-gradient(180deg, rgba(60, 35, 20, 0.8) 0%, rgba(30, 18, 10, 0.9) 100%);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      box-shadow: 0 0 25px rgba(139, 105, 20, 0.3), inset 0 0 30px rgba(0, 0, 0, 0.5);
+      border-radius: 8px;
+    }
+
+    .archive-header h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 2rem;
+      color: #c9a84c;
+      text-shadow: 0 0 20px rgba(201, 168, 76, 0.6), 2px 2px 4px rgba(0, 0, 0, 0.8);
+      letter-spacing: 4px;
+      margin-bottom: 0.5rem;
+      font-weight: 900;
+    }
+
+    .session-quote {
+      color: #a89870;
+      font-style: italic;
+      text-align: center;
+      margin: 1rem 0;
+      font-size: 0.95rem;
+      padding: 0.8rem;
+      border-left: 2px solid #6b4c2a;
+      border-right: 2px solid #6b4c2a;
+    }
+
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1.5rem 0;
+      justify-content: center;
+    }
+
+    .tab-btn {
+      font-family: 'Cinzel', serif;
+      padding: 0.6rem 1.2rem;
+      border: 2px solid #8b6914;
+      background: rgba(15, 8, 4, 0.8);
+      color: #e8d48b;
+      cursor: pointer;
+      letter-spacing: 1px;
+      transition: 0.3s;
+      border-radius: 3px;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+    }
+
+    .tab-btn:hover {
+      background: #4a2c1a;
+      box-shadow: 0 0 15px rgba(201, 168, 76, 0.4);
+    }
+
+    .tab-btn.active {
+      background: linear-gradient(180deg, #4a2c1a 0%, #2c1810 100%);
+      border-color: #c9a84c;
+      color: #fff;
+      box-shadow: 0 0 20px rgba(201, 168, 76, 0.5);
+    }
+
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .character-section {
+      background: rgba(20, 12, 6, 0.8);
+      border: 2px solid #6b4c2a;
+      border-left: 4px solid #c9a84c;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 4px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+    }
+
+    .character-section h2 {
+      font-family: 'Cinzel', serif;
+      color: #c9a84c;
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      letter-spacing: 2px;
+    }
+
+    .character-section h3 {
+      font-family: 'Cinzel', serif;
+      color: #e8d48b;
+      font-size: 1rem;
+      margin: 1rem 0 0.5rem 0;
+      letter-spacing: 1px;
+    }
+
+    .character-section p {
+      line-height: 1.7;
+      margin: 0.3rem 0;
+      color: #d4c09a;
+    }
+
+    .highlight {
+      color: #e8d48b;
+      font-weight: bold;
+    }
+
+    .stat-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.8rem 0;
+      font-size: 0.9rem;
+    }
+
+    .stat-table th {
+      font-family: 'Cinzel', serif;
+      background: rgba(60, 35, 20, 0.8);
+      color: #c9a84c;
+      padding: 0.5rem;
+      border: 1px solid #6b4c2a;
+      letter-spacing: 1px;
+      font-size: 0.8rem;
+    }
+
+    .stat-table td {
+      padding: 0.5rem;
+      border: 1px solid #6b4c2a;
+      color: #d4c09a;
+      text-align: center;
+    }
+
+    .stat-table .attr-col {
+      font-weight: bold;
+      color: #e8d48b;
+      text-align: left;
+    }
+
+    .stat-table .green {
+      color: #4a7c2a;
+      font-weight: bold;
+    }
+
+    .stat-table .gold {
+      color: #c9a84c;
+      font-weight: bold;
+    }
+
+    .level-badge {
+      display: inline-block;
+      padding: 0.2rem 0.8rem;
+      border-radius: 3px;
+      font-weight: bold;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+    }
+
+    .level-recruit {
+      background: rgba(80, 80, 80, 0.5);
+      color: #ccc;
+      border: 1px solid #888;
+    }
+
+    .level-apprentice {
+      background: rgba(80, 60, 30, 0.5);
+      color: #d4b87a;
+      border: 1px solid #a08040;
+    }
+
+    .level-worker {
+      background: rgba(30, 80, 30, 0.5);
+      color: #80d480;
+      border: 1px solid #408040;
+    }
+
+    .level-master {
+      background: rgba(139, 105, 20, 0.5);
+      color: #ffd700;
+      border: 1px solid #c9a84c;
+    }
+
+    .debuff-box {
+      background: rgba(30, 10, 5, 0.8);
+      border: 2px solid #8b1a1a;
+      padding: 1rem;
+      margin: 0.8rem 0;
+      border-radius: 4px;
+    }
+
+    .debuff-box h4 {
+      font-family: 'Cinzel', serif;
+      color: #c92a2a;
+      margin-bottom: 0.5rem;
+      letter-spacing: 1px;
+    }
+
+    .buff-box {
+      background: rgba(10, 30, 5, 0.8);
+      border: 2px solid #4a7c2a;
+      padding: 1rem;
+      margin: 0.8rem 0;
+      border-radius: 4px;
+    }
+
+    .buff-box h4 {
+      font-family: 'Cinzel', serif;
+      color: #4a7c2a;
+      margin-bottom: 0.5rem;
+      letter-spacing: 1px;
+    }
+
+    .mechanics-box {
+      background: rgba(15, 8, 4, 0.9);
+      border: 1px solid #6b4c2a;
+      padding: 0.8rem 1rem;
+      margin: 0.5rem 0;
+      border-radius: 3px;
+    }
+
+    .mechanics-box strong {
+      color: #e8d48b;
+    }
+
+    .summary-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.8rem;
+    }
+
+    .summary-table th {
+      font-family: 'Cinzel', serif;
+      background: rgba(60, 35, 20, 0.8);
+      color: #c9a84c;
+      padding: 0.6rem;
+      border: 1px solid #6b4c2a;
+      letter-spacing: 1px;
+      font-size: 0.75rem;
+    }
+
+    .summary-table td {
+      padding: 0.5rem;
+      border: 1px solid #6b4c2a;
+      color: #d4c09a;
+      text-align: center;
+    }
+
+    .combined-box {
+      background: rgba(60, 35, 20, 0.6);
+      border: 3px solid #c9a84c;
+      padding: 1.2rem;
+      margin: 1rem 0;
+      border-radius: 6px;
+      box-shadow: 0 0 20px rgba(201, 168, 76, 0.3);
+    }
+
+    .combined-box h3 {
+      font-family: 'Cinzel', serif;
+      color: #fff;
+      text-align: center;
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+      margin-bottom: 1rem;
+    }
+
+    @media (max-width: 600px) {
+      body { padding: 1rem; }
+      .main-container { padding: 1.5rem; }
+      .tabs { flex-direction: column; }
+      .tab-btn { text-align: center; }
+      .stat-table { font-size: 0.75rem; }
+      .summary-table { font-size: 0.7rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="main-container">
+  <a href="../index.html" class="back-btn">◄ Retornar às Crônicas</a>
+
+  <div class="archive-header">
+    <h1>━━━ O SALTO TEMPORAL ━━━</h1>
+    <div style="font-family: 'Cinzel', serif; font-size: 1rem; color: #e8d48b;">Status, Habilidades e Traumas</div>
+  </div>
+
+  <div class="session-quote">
+    "O tempo não cura todas as feridas. Algumas ele apenas aprofunda."
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('status')">📊 Status</button>
+    <button class="tab-btn" onclick="switchTab('debuffs')">☠️ Debuffs</button>
+    <button class="tab-btn" onclick="switchTab('buffs')">⚔️ Habilidades</button>
+    <button class="tab-btn" onclick="switchTab('combinadas')">🔥 Combinadas</button>
+    <button class="tab-btn" onclick="switchTab('resumo')">📋 Resumo Geral</button>
+  </div>
+
+  <!-- ==================== STATUS ==================== -->
+  <div class="tab-content active" id="tab-status">
+    <h2 style="font-family:'Cinzel',serif; color:#c9a84c; text-align:center; margin-bottom:1.5rem;">📊 STATUS PÓS-TIMESKIP</h2>
+
+    <!-- CAÇADOR -->
+    <div class="character-section">
+      <h2>🏹 CAÇADOR — Rastreador</h2>
+      <table class="stat-table">
+        <tr><th>Atributo</th><th>Alteração</th></tr>
+        <tr><td class="attr-col">Agilidade</td><td class="green">+2</td></tr>
+        <tr><td class="attr-col">Vigor</td><td class="green">+1</td></tr>
+        <tr><td class="attr-col">Intelecto</td><td class="green">+1</td></tr>
+        <tr><td class="attr-col"><strong>Total</strong></td><td class="gold"><strong>+4/4</strong></td></tr>
+      </table>
+      <table class="stat-table">
+        <tr><th>Item</th><th>Antes</th><th>Depois</th></tr>
+        <tr><td class="attr-col">Ofício (Rastreador)</td><td>410 XP</td><td><span class="level-worker">Trabalhador</span> <strong>650 XP / 1000</strong></td></tr>
+        <tr><td class="attr-col">Honra</td><td>100%</td><td><strong>100%</strong></td></tr>
+        <tr><td class="attr-col">N.E.A.</td><td>37,1%</td><td><strong>39,0%</strong></td></tr>
+        <tr><td class="attr-col">Corrupção</td><td>—</td><td><strong>Sem alteração</strong></td></tr>
+      </table>
+    </div>
+
+    <!-- CROCOTOP (CORRIGIDO) -->
+    <div class="character-section">
+      <h2>🐊 CROCOTOP — Pescador</h2>
+      <table class="stat-table">
+        <tr><th>Atributo</th><th>Alteração</th></tr>
+        <tr><td class="attr-col">Vigor</td><td class="green">+2</td></tr>
+        <tr><td class="attr-col">Agilidade</td><td class="green">+1</td></tr>
+        <tr><td class="attr-col">Intelecto</td><td class="green">+1</td></tr>
+        <tr><td class="attr-col"><strong>Total</strong></td><td class="gold"><strong>+4/4</strong></td></tr>
+      </table>
+      <table class="stat-table">
+        <tr><th>Item</th><th>Antes</th><th>Depois</th></tr>
+        <tr><td class="attr-col">Ofício (Pescador)</td><td>200 XP</td><td><span class="level-worker">Trabalhador</span> <strong>450 XP / 1000</strong></td></tr>
+        <tr><td class="attr-col">Honra</td><td>46%</td><td><strong>52%</strong></td></tr>
+        <tr><td class="attr-col">N.E.A.</td><td>45,0%</td><td><strong>45,0%</strong></td></tr>
+        <tr><td class="attr-col">Corrupção</td><td>—</td><td><strong>Sem alteração</strong></td></tr>
+      </table>
+    </div>
+
+    <!-- DRAVON -->
+    <div class="character-section">
+      <h2>⚔️ DRAVON — Mercenário</h2>
+      <table class="stat-table">
+        <tr><th>Atributo</th><th>Alteração</th></tr>
+        <tr><td class="attr-col">Força</td><td class="green">+2</td></tr>
+        <tr><td class="attr-col">Vigor</td><td class="green">+1</td></tr>
+        <tr><td class="attr-col">Intelecto</td><td class="green">+1</td></tr>
+        <tr><td class="attr-col"><strong>Total</strong></td><td class="gold"><strong>+4/4</strong></td></tr>
+      </table>
+      <table class="stat-table">
+        <tr><th>Item</th><th>Antes</th><th>Depois</th></tr>
+        <tr><td class="attr-col">Ofício (Mercenário)</td><td>70 XP</td><td><span class="level-apprentice">Estagiário</span> <strong>300 XP / 1000</strong></td></tr>
+        <tr><td class="attr-col">Honra</td><td>1%</td><td><strong>7%</strong></td></tr>
+        <tr><td class="attr-col">N.E.A.</td><td>27,7%</td><td><strong>31,0%</strong></td></tr>
+        <tr><td class="attr-col">Corrupção</td><td>—</td><td><strong>Sem alteração</strong></td></tr>
+      </table>
+    </div>
+
+    <!-- ELION -->
+    <div class="character-section">
+      <h2>⚕️ ELION — Médico</h2>
+      <table class="stat-table">
+        <tr><th>Atributo</th><th>Alteração</th></tr>
+        <tr><td class="attr-col">Intelecto</td><td class="green">+2</td></tr>
+        <tr><td class="attr-col">Vigor</td><td class="green">+1</td></tr>
+        <tr><td class="attr-col">Carisma</td><td class="green">+1</td></tr>
+        <tr><td class="attr-col"><strong>Total</strong></td><td class="gold"><strong>+4/4</strong></td></tr>
+      </table>
+      <table class="stat-table">
+        <tr><th>Item</th><th>Antes</th><th>Depois</th></tr>
+        <tr><td class="attr-col">Ofício (Médico)</td><td>650 XP</td><td><span class="level-master">Mestre</span> <strong>900 XP / 1000</strong></td></tr>
+        <tr><td class="attr-col">Honra</td><td>100%</td><td><strong>100%</strong></td></tr>
+        <tr><td class="attr-col">N.E.A.</td><td>38,4%</td><td><strong>40,0%</strong></td></tr>
+        <tr><td class="attr-col">Corrupção</td><td>—</td><td><strong>Sem alteração</strong></td></tr>
+      </table>
+    </div>
+
+    <!-- EREN (CORRIGIDO) -->
+    <div class="character-section">
+      <h2>🍳 EREN — Cozinheiro</h2>
+      <table class="stat-table">
+        <tr><th>Atributo</th><th>Alteração</th></tr>
+        <tr><td class="attr-col">Carisma</td><td class="green">+2</td></tr>
+        <tr><td class="attr-col">Vigor</td><td class="green">+1</td></tr>
+        <tr><td class="attr-col">Agilidade</td><td class="green">+1</td></tr>
+        <tr><td class="attr-col"><strong>Total</strong></td><td class="gold"><strong>+4/4</strong></td></tr>
+      </table>
+      <table class="stat-table">
+        <tr><th>Item</th><th>Antes</th><th>Depois</th></tr>
+        <tr><td class="attr-col">Ofício (Cozinheiro)</td><td>160 XP</td><td><span class="level-worker">Trabalhador</span> <strong>360 XP / 1000</strong></td></tr>
+        <tr><td class="attr-col">Honra</td><td>47%</td><td><strong>55%</strong></td></tr>
+        <tr><td class="attr-col">N.E.A.</td><td>44,1%</td><td><strong>45,6%</strong></td></tr>
+        <tr><td class="attr-col">Corrupção</td><td>—</td><td><strong>Sem alteração</strong></td></tr>
+      </table>
+    </div>
+
+    <!-- EVANGELINE -->
+    <div class="character-section">
+      <h2>🌿 EVANGELINE — Herbalista / Alquimista</h2>
+      <table class="stat-table">
+        <tr><th>Atributo</th><th>Alteração</th></tr>
+        <tr><td class="attr-col">Intelecto</td><td class="green">+2</td></tr>
+        <tr><td class="attr-col">Magia</td><td class="green">+1</td></tr>
+        <tr><td class="attr-col">Carisma</td><td class="green">+1</td></tr>
+        <tr><td class="attr-col"><strong>Total</strong></td><td class="gold"><strong>+4/4</strong></td></tr>
+      </table>
+      <table class="stat-table">
+        <tr><th>Item</th><th>Antes</th><th>Depois</th></tr>
+        <tr><td class="attr-col">Ofício (Herbalista)</td><td>380 XP</td><td><span class="level-worker">Trabalhador</span> <strong>600 XP / 1000</strong></td></tr>
+        <tr><td class="attr-col">Honra</td><td>97%</td><td><strong>100%</strong></td></tr>
+        <tr><td class="attr-col">N.E.A.</td><td>38,0%</td><td><strong>42,0%</strong></td></tr>
+        <tr><td class="attr-col">Corrupção</td><td>—</td><td><strong>Sem alteração</strong></td></tr>
+      </table>
+    </div>
+
+    <!-- KAEL (CORRIGIDO: HONRA) -->
+    <div class="character-section">
+      <h2>🔨 KAEL — Ferreiro / Técnico de Forja-Viva</h2>
+      <table class="stat-table">
+        <tr><th>Atributo</th><th>Alteração</th></tr>
+        <tr><td class="attr-col">Força</td><td class="green">+1</td></tr>
+        <tr><td class="attr-col">Agilidade</td><td class="green">+1</td></tr>
+        <tr><td class="attr-col">Vigor</td><td class="green">+1</td></tr>
+        <tr><td class="attr-col">Magia</td><td class="green">+1</td></tr>
+        <tr><td class="attr-col"><strong>Total</strong></td><td class="gold"><strong>+4/4</strong></td></tr>
+      </table>
+      <table class="stat-table">
+        <tr><th>Item</th><th>Antes</th><th>Depois</th></tr>
+        <tr><td class="attr-col">Ofício (Ferreiro)</td><td>40 XP</td><td><span class="level-apprentice">Estagiário</span> <strong>240 XP / 1000</strong></td></tr>
+        <tr><td class="attr-col">Honra</td><td>42%</td><td><strong>60%</strong></td></tr>
+        <tr><td class="attr-col">N.E.A.</td><td>27,0%</td><td><strong>30,0%</strong></td></tr>
+        <tr><td class="attr-col">Corrupção</td><td>—</td><td><strong>Sem alteração</strong></td></tr>
+      </table>
+    </div>
+
+    <!-- LEGENDA DE NÍVEIS -->
+    <div style="text-align:center; margin-top:1.5rem; padding:1rem; background:rgba(15,8,4,0.8); border:2px solid #6b4c2a; border-radius:6px;">
+      <h3 style="font-family:'Cinzel',serif; color:#c9a84c; margin-bottom:0.8rem;">📋 NÍVEIS DE OFÍCIO</h3>
+      <p style="color:#d4c09a; font-size:0.85rem;">
+        <span class="level-recruit">0 - 150</span> Recruta do Ofício &nbsp;|&nbsp;
+        <span class="level-apprentice">150 - 300</span> Estagiário do Ofício &nbsp;|&nbsp;
+        <span class="level-worker">300 - 650</span> Trabalhador do Ofício &nbsp;|&nbsp;
+        <span class="level-master">650 - 1000</span> Mestre do Ofício
+      </p>
+    </div>
+  </div>
+
+  <!-- ==================== DEBUFFS ==================== -->
+  <div class="tab-content" id="tab-debuffs">
+    <h2 style="font-family:'Cinzel',serif; color:#c92a2a; text-align:center; margin-bottom:1.5rem;">☠️ TRAUMAS E DEBUFFS</h2>
+
+    <div class="character-section">
+      <h2>🏹 CAÇADOR — "O Echo da Solidão"</h2>
+      <div class="debuff-box">
+        <h4>☠️ Pior Debuff: Paranoia de Abandono (Mental)</h4>
+        <p>Caçador passou meses acreditando que foi deliberadamente deixado para trás. Os Anciões quebraram sua confiança.</p>
+        <div class="mechanics-box">
+          <strong>Mecânica:</strong> Sempre que Caçador for separado do grupo, perder um aliado de vista, ou sentir que foi ignorado, deve fazer um <strong>teste de VIGOR CD 16</strong>. Em caso de falha, sofre <strong>-3 em INTELECTO e CARISMA</strong> até reencontrar o grupo. Se falhar por 5 ou mais, perde <strong>1d6 de Sanidade</strong> e age impulsivamente para "provar" seu valor.
+        </div>
+      </div>
+      <div class="debuff-box">
+        <h4>☠️ Debuff Secundário: Instinto Autodestrutivo (Físico)</h4>
+        <div class="mechanics-box">
+          <strong>Mecânica:</strong> Em perigo extremo, pode agir sozinho. Recebe <strong>+1 em AGILIDADE</strong>, mas sofre <strong>-3 em VIGOR</strong> até o fim da cena. Ao final, teste <strong>VIGOR CD 14</strong> ou perde <strong>1d4 de Sanidade</strong>.
+        </div>
+      </div>
+    </div>
+
+    <div class="character-section">
+      <h2>🐊 CROCOTOP — "O Peso dos Trinta Anos"</h2>
+      <div class="debuff-box">
+        <h4>☠️ Pior Debuff: Luto Fantasma (Emocional)</h4>
+        <p>Crocotop viveu 30 anos com Mara e Luan. A dor da perda é real e paralisante.</p>
+        <div class="mechanics-box">
+          <strong>Mecânica:</strong> Em cenas de descanso ou momentos que lembrem a vila, deve fazer <strong>teste de VIGOR CD 15</strong>. Em caso de falha, sofre <strong>-3 em CARISMA e INTELECTO</strong> pelo resto da cena e perde <strong>1d4 de Sanidade</strong>. Em sucesso, suprime a dor mas perde <strong>1 de Sanidade</strong>.
+        </div>
+      </div>
+      <div class="debuff-box">
+        <h4>☠️ Debuff Secundário: Hesitação do Predador (Físico)</h4>
+        <div class="mechanics-box">
+          <strong>Mecânica:</strong> Ao enfrentar inimigo ferido ou em desvantagem, deve fazer <strong>teste de VIGOR CD 14</strong> para desferir golpe final. Em falha, não pode atacar aquele inimigo no turno. Se forçado, sofre <strong>-2 em FORÇA</strong>.
+        </div>
+      </div>
+    </div>
+
+    <div class="character-section">
+      <h2>⚕️ ELION — "As Mãos que Não Curam"</h2>
+      <div class="debuff-box">
+        <h4>☠️ Pior Debuff: Ansiedade do Curandeiro (Mental)</h4>
+        <p>Elion perdeu um paciente no Santuário. O trauma de falhar sem magia o assombra.</p>
+        <div class="mechanics-box">
+          <strong>Mecânica:</strong> Ao curar aliado com menos de 25% de vida ou em emergência, deve fazer <strong>teste de VIGOR CD 17</strong>. Em falha, a cura é reduzida em <strong>-2d6 pontos</strong>. Se falhar por 5 ou mais, fica paralisado 1 turno (revivendo a memória). Perde <strong>1d4 de Sanidade</strong> em qualquer falha.
+        </div>
+      </div>
+      <div class="debuff-box">
+        <h4>☠️ Debuff Secundário: Sobrecarga Empática (Sanidade)</h4>
+        <div class="mechanics-box">
+          <strong>Mecânica:</strong> Ao testemunhar aliado sofrer dano crítico (+50% da vida) ou morrer, deve fazer <strong>teste de VIGOR CD 16</strong>. Em falha, perde <strong>1d6 de Sanidade</strong> e sofre <strong>-2 em todos os testes</strong> até o fim da cena.
+        </div>
+      </div>
+    </div>
+
+    <div class="character-section">
+      <h2>🌿 EVANGELINE — "A Mulher que Viu o Abismo"</h2>
+      <div class="debuff-box">
+        <h4>☠️ Pior Debuff: Silêncio Aterrorizante (Mental/Sanidade)</h4>
+        <p>154 dias de isolamento. Ela conversou com reflexos. O silêncio é seu gatilho.</p>
+        <div class="mechanics-box">
+          <strong>Mecânica:</strong> Sempre que ficar sozinha por mais de 10 minutos ou em ambiente completamente silencioso, deve fazer <strong>teste de VIGOR CD 18</strong>. Em falha, sofre <strong>-4 em INTELECTO e CARISMA</strong> e perde <strong>1d6 de Sanidade</strong> a cada 10 minutos adicionais de silêncio. Em sucesso, ainda sofre <strong>-2 em INTELECTO</strong>.
+        </div>
+      </div>
+      <div class="debuff-box">
+        <h4>☠️ Debuff Secundário: Queimadura Fantasma (Físico)</h4>
+        <div class="mechanics-box">
+          <strong>Mecânica:</strong> Ao ver fogo intenso ou ser alvo de ataque de fogo, deve fazer <strong>teste de VIGOR CD 15</strong>. Em falha, sofre <strong>-3 em AGILIDADE e MAGIA</strong> por 3 turnos e perde <strong>1d4 de Sanidade</strong>.
+        </div>
+      </div>
+    </div>
+
+    <div class="character-section">
+      <h2>🍳 EREN — "O Homem que Aprendeu a Ficar"</h2>
+      <div class="debuff-box">
+        <h4>☠️ Pior Debuff: Culpa do Sobrevivente Feliz (Emocional)</h4>
+        <p>Eren encontrou felicidade com Kaelin enquanto os outros sofriam. A culpa é esmagadora.</p>
+        <div class="mechanics-box">
+          <strong>Mecânica:</strong> Em situações onde aliados estão sofrendo ou em perigo, deve fazer <strong>teste de VIGOR CD 16</strong>. Em falha, sofre <strong>-3 em AGILIDADE e INTELECTO</strong> (sabotagem inconsciente). Se falhar por 5 ou mais, perde <strong>1d6 de Sanidade</strong> e fica atordoado 1 turno.
+        </div>
+      </div>
+      <div class="debuff-box">
+        <h4>☠️ Debuff Secundário: O Vínculo que Distrai (Mental)</h4>
+        <div class="mechanics-box">
+          <strong>Mecânica:</strong> Longe de Kaelin, deve fazer <strong>teste de VIGOR CD 14</strong> para se concentrar em tarefas complexas. Em falha, sofre <strong>-2 em INTELECTO</strong>. Falha crítica (por 5+) faz perder completamente o foco por 1 turno.
+        </div>
+      </div>
+    </div>
+
+    <div class="character-section">
+      <h2>🔨 KAEL — "O Ferreiro que Trouxe a Morte"</h2>
+      <div class="debuff-box">
+        <h4>☠️ Pior Debuff: O Medo do Monstro Interior (Mental/Sanidade)</h4>
+        <p>Kael usou necromancia para reviver Dravon. Foi chamado de "Necromante". Teme se tornar igual aos pais.</p>
+        <div class="mechanics-box">
+          <strong>Mecânica:</strong> Ao usar necromancia em situação crítica (reviver aliado, controlar mortos, etc.), deve fazer <strong>teste de VIGOR CD 18</strong>. Em falha, realiza a magia mas sofre <strong>-3 em todos os testes</strong> pelo resto da cena e perde <strong>1d6 de Sanidade</strong>. Em sucesso, ainda sofre <strong>-2 em VIGOR</strong> pelo esforço mental.
+        </div>
+      </div>
+      <div class="debuff-box">
+        <h4>☠️ Debuff Secundário: Exaustão da Manopla (Físico)</h4>
+        <div class="mechanics-box">
+          <strong>Mecânica:</strong> Após usar habilidades que exigem grande esforço (ataques com manopla, magias poderosas), deve fazer <strong>teste de VIGOR CD 14</strong>. Em falha, sofre <strong>-3 em FORÇA e AGILIDADE</strong> até o fim da cena. Falha crítica (por 5+) faz deixar cair a manopla ou espada por 1 turno.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== BUFFS ==================== -->
+  <div class="tab-content" id="tab-buffs">
+    <h2 style="font-family:'Cinzel',serif; color:#4a7c2a; text-align:center; margin-bottom:1.5rem;">⚔️ NOVAS HABILIDADES</h2>
+
+    <div class="character-section">
+      <h2>🏹 CAÇADOR</h2>
+      <div class="buff-box">
+        <h4>⚔️ Juramento dos Garrakhai (Resistência/Sobrevivência)</h4>
+        <div class="mechanics-box">
+          <strong>Ativação:</strong> Reação (quando receber dano ou estiver com menos de 25% de vida)<br>
+          <strong>Uso:</strong> 1 vez por cena<br>
+          <strong>Efeito:</strong> +3 em VIGOR e +3 em FORÇA por 2 turnos. +2 em testes de resistência contra derrubar/atordoar.<br>
+          <strong>Custo:</strong> -2 em todos os testes por 1 turno após o efeito.
+        </div>
+      </div>
+      <div class="buff-box">
+        <h4>⚔️ Caçador Solitário (Combate Ofensivo)</h4>
+        <div class="mechanics-box">
+          <strong>Ativação:</strong> Ação Principal (ataque corpo a corpo)<br>
+          <strong>Uso:</strong> 1 vez por combate<br>
+          <strong>Condição:</strong> Caçador deve estar sozinho (sem aliados adjacentes ao inimigo)<br>
+          <strong>Dano:</strong> 1d12+1d6 (arma) + 2d8 de dano adicional<br>
+          <strong>Efeito:</strong> Inimigo sofre -2 em testes de ataque por 1 turno<br>
+          <strong>Resistência:</strong> Inimigo pode fazer VIGOR CD 15 para reduzir dano adicional pela metade
+        </div>
+      </div>
+    </div>
+
+    <div class="character-section">
+      <h2>🐊 CROCOTOP</h2>
+      <div class="buff-box">
+        <h4>⚔️ Mão de Pescador (Utilidade/Precisão)</h4>
+        <div class="mechanics-box">
+          <strong>Ativação:</strong> Ação Principal ou Bônus<br>
+          <strong>Uso:</strong> 1 vez por cena<br>
+          <strong>Efeito:</strong> +3 em AGILIDADE para ação de precisão manual<br>
+          <strong>Ataque:</strong> 2d6 de dano + imobilizado por 1 turno (FORÇA CD 14 para escapar)<br>
+          <strong>Utilidade:</strong> Teste de AGILIDADE com vantagem
+        </div>
+      </div>
+      <div class="buff-box">
+        <h4>⚔️ Lembrança de Mara (Resistência Emocional/Recuperação)</h4>
+        <div class="mechanics-box">
+          <strong>Ativação:</strong> Ação Bônus (sob medo, raiva ou perda de controle)<br>
+          <strong>Uso:</strong> 1 vez por dia<br>
+          <strong>Efeito:</strong> Remove medo/raiva/confusão. +3 CARISMA e +2 INTELECTO por 3 turnos. Recupera 1d6 de Sanidade.<br>
+          <strong>Falha:</strong> Resiste mas perde 1 de Sanidade
+        </div>
+      </div>
+    </div>
+
+    <div class="character-section">
+      <h2>⚕️ ELION</h2>
+      <div class="buff-box">
+        <h4>⚔️ Mão Firme (Cura Aprimorada)</h4>
+        <div class="mechanics-box">
+          <strong>Ativação:</strong> Ação Principal (toque em aliado)<br>
+          <strong>Uso:</strong> 1 vez por cena<br>
+          <strong>Cura:</strong> 2d8+6 de vida<br>
+          <strong>Condição Especial:</strong> Se aliado < 25% vida, cura maximizada (22 pontos)<br>
+          <strong>Custo de Mana:</strong> 20 pontos
+        </div>
+      </div>
+      <div class="buff-box">
+        <h4>⚔️ Cura Instintiva (Reação de Emergência)</h4>
+        <div class="mechanics-box">
+          <strong>Ativação:</strong> Reação (aliado fica < 25% vida)<br>
+          <strong>Uso:</strong> 1 vez por combate<br>
+          <strong>Cura:</strong> 1d10+4 de vida<br>
+          <strong>Efeito Adicional:</strong> Aliado ganha +2 em VIGOR contra próximo ataque<br>
+          <strong>Custo de Mana:</strong> 15 pontos
+        </div>
+      </div>
+    </div>
+
+    <div class="character-section">
+      <h2>🌿 EVANGELINE</h2>
+      <div class="buff-box">
+        <h4>⚔️ Leitura de Fenômenos (Magia/Percepção Mágica)</h4>
+        <div class="mechanics-box">
+          <strong>Ativação:</strong> Ação Principal (concentração 1 turno)<br>
+          <strong>Uso:</strong> 1 vez por cena<br>
+          <strong>Teste:</strong> MAGIA CD 14<br>
+          <strong>Sucesso:</strong> Identifica se alvo é mágico normal, anômalo ou vazio<br>
+          <strong>Crítico (19+):</strong> Descobre uma fraqueza ou característica específica<br>
+          <strong>Custo de Mana:</strong> 10 pontos
+        </div>
+      </div>
+      <div class="buff-box">
+        <h4>⚔️ Conexão de Padrões (Intelecto/Investigação)</h4>
+        <div class="mechanics-box">
+          <strong>Ativação:</strong> Ação Principal (investigando um mistério)<br>
+          <strong>Uso:</strong> 1 vez por dia<br>
+          <strong>Teste:</strong> INTELECTO CD 16<br>
+          <strong>Sucesso:</strong> Recebe pista clara sobre próxima resposta<br>
+          <strong>Crítico (21+):</strong> Identifica relação de causa/efeito ou ponto fraco
+        </div>
+      </div>
+    </div>
+
+    <div class="character-section">
+      <h2>🍳 EREN</h2>
+      <div class="buff-box">
+        <h4>⚔️ Predador de Oportunidades (Combate Ofensivo)</h4>
+        <div class="mechanics-box">
+          <strong>Ativação:</strong> Ação Principal (ataque)<br>
+          <strong>Uso:</strong> 1 vez por combate<br>
+          <strong>Condição:</strong> Inimigo distraído, flanqueado ou desprevenido<br>
+          <strong>Dano:</strong> 1d8 (arma) + 2d8 dano adicional<br>
+          <strong>Efeito:</strong> Pode reposicionar até 3m sem provocar ataque de oportunidade<br>
+          <strong>Resistência:</strong> AGILIDADE CD 14 para reduzir dano adicional
+        </div>
+      </div>
+      <div class="buff-box">
+        <h4>⚔️ Sombra Protetora (Defesa/Reação)</h4>
+        <div class="mechanics-box">
+          <strong>Ativação:</strong> Reação (aliado adjacente alvo de ataque)<br>
+          <strong>Uso:</strong> 1 vez por combate<br>
+          <strong>Opção 1:</strong> Puxa aliado para sombra (ataque erra) — AGILIDADE CD 14<br>
+          <strong>Opção 2:</strong> Barreira de sombras (+4 VIGOR ao aliado)<br>
+          <strong>Efeito:</strong> Aliado ganha +2 em furtividade por 1 turno<br>
+          <strong>Custo de Mana:</strong> 15 pontos
+        </div>
+      </div>
+    </div>
+
+    <div class="character-section">
+      <h2>🔨 KAEL</h2>
+      <div class="buff-box">
+        <h4>⚔️ Forja da Vontade (Resistência Mental)</h4>
+        <div class="mechanics-box">
+          <strong>Ativação:</strong> Reação (alvo de efeito mental)<br>
+          <strong>Uso:</strong> 1 vez por dia<br>
+          <strong>Teste:</strong> VIGOR CD 14<br>
+          <strong>Sucesso:</strong> Anula efeito + +3 FORÇA e +2 VIGOR pelo resto da cena<br>
+          <strong>Crítico (19+):</strong> Reflete parte do efeito (conjurador sofre -2)<br>
+          <strong>Falha:</strong> Resiste mas sofre -2 em todos os testes por 1 turno
+        </div>
+      </div>
+      <div class="buff-box">
+        <h4>⚔️ Ferrada Negra (Combate Ofensivo/Necromancia)</h4>
+        <div class="mechanics-box">
+          <strong>Ativação:</strong> Ação Principal (ataque até 10m)<br>
+          <strong>Uso:</strong> 1 vez por combate<br>
+          <strong>Dano:</strong> 2d8 de necromancia (ignora resistências físicas)<br>
+          <strong>Efeito:</strong> Alvo sofre -3 em VIGOR por 2 turnos<br>
+          <strong>Resistência:</strong> VIGOR CD 15 para reduzir dano pela metade<br>
+          <strong>Custo de Mana:</strong> 20 pontos
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== HABILIDADES COMBINADAS ==================== -->
+  <div class="tab-content" id="tab-combinadas">
+    <h2 style="font-family:'Cinzel',serif; color:#e8d48b; text-align:center; margin-bottom:1.5rem;">🔥 HABILIDADES COMBINADAS</h2>
+
+    <div class="combined-box">
+      <h3>🔥 RASTRO DE FERRO — CAÇADOR + KAEL</h3>
+      <p style="text-align:center; font-style:italic; color:#a89870;">"Uma dança de ferro e sombras que poucos conseguem sobreviver."</p>
+      <br>
+      <div class="mechanics-box">
+        <strong>Ativação:</strong> Ambos gastam Ação Principal no mesmo turno<br>
+        <strong>Uso:</strong> 1 vez por dia<br>
+        <strong>Condição:</strong> Ambos em combate, com pelo menos 50% de vida<br>
+        <br>
+        <strong>Passo 1 — Caçador (Ataque de Flanco):</strong><br>
+        • +2 em AGILIDADE<br>
+        • Dano: 1d12+1d6 (arma) + 2d6 adicional<br>
+        • Efeito: Inimigo sofre -2 em DEFESA por 2 turnos<br>
+        • Resistência: AGILIDADE CD 14 para evitar debuff<br>
+        <br>
+        <strong>Passo 2 — Kael (Ataque de Impacto):</strong><br>
+        • +2 em FORÇA<br>
+        • Dano: 2d8 de necromancia (ignora resistências)<br>
+        • Efeito: Inimigo sofre -2 em FORÇA por 2 turnos<br>
+        • Resistência: VIGOR CD 15 para reduzir dano pela metade<br>
+        <br>
+        <strong>Efeito Combinado (se ambos acertarem):</strong><br>
+        • Inimigo fica ATORDOADO por 1 turno (não pode agir)<br>
+        • Resistência: VIGOR CD 16 para resistir ao atordoamento<br>
+        <br>
+        <strong>Custo:</strong><br>
+        • Caçador: 10 de mana<br>
+        • Kael: 15 de mana
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== RESUMO ==================== -->
+  <div class="tab-content" id="tab-resumo">
+    <h2 style="font-family:'Cinzel',serif; color:#c9a84c; text-align:center; margin-bottom:1.5rem;">📋 RESUMO GERAL</h2>
+
+    <h3 style="font-family:'Cinzel',serif; color:#c9a84c; margin:1rem 0;">📊 STATUS</h3>
+    <table class="summary-table">
+      <thead>
+        <tr><th>Personagem</th><th>Ofício</th><th>Nível</th><th>XP</th><th>Honra</th><th>N.E.A.</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>🏹 Caçador</td><td>Rastreador</td><td><span class="level-worker">Trabalhador</span></td><td>650/1000</td><td>100%</td><td>37,1%→39,0%</td></tr>
+        <tr><td>🐊 Crocotop</td><td>Pescador</td><td><span class="level-worker">Trabalhador</span></td><td>450/1000</td><td>46%→52%</td><td>45,0%→45,0%</td></tr>
+        <tr><td>⚔️ Dravon</td><td>Mercenário</td><td><span class="level-apprentice">Estagiário</span></td><td>300/1000</td><td>1%→7%</td><td>27,7%→31,0%</td></tr>
+        <tr><td>⚕️ Elion</td><td>Médico</td><td><span class="level-master">Mestre</span></td><td>900/1000</td><td>100%</td><td>38,4%→40,0%</td></tr>
+        <tr><td>🍳 Eren</td><td>Cozinheiro</td><td><span class="level-worker">Trabalhador</span></td><td>360/1000</td><td>47%→55%</td><td>44,1%→45,6%</td></tr>
+        <tr><td>🌿 Evangeline</td><td>Herbalista</td><td><span class="level-worker">Trabalhador</span></td><td>600/1000</td><td>97%→100%</td><td>38,0%→42,0%</td></tr>
+        <tr><td>🔨 Kael</td><td>Ferreiro</td><td><span class="level-apprentice">Estagiário</span></td><td>240/1000</td><td>42%→60%</td><td>27,0%→30,0%</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="font-family:'Cinzel',serif; color:#c92a2a; margin:1.5rem 0 1rem 0;">☠️ DEBUFFS</h3>
+    <table class="summary-table">
+      <thead>
+        <tr><th>Personagem</th><th>Debuff Principal</th><th>DT</th><th>Penalidade</th><th>Sanidade</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>🏹 Caçador</td><td>Paranoia de Abandono</td><td>16</td><td>-3 INT/CAR</td><td>-1d6</td></tr>
+        <tr><td>🐊 Crocotop</td><td>Luto Fantasma</td><td>15</td><td>-3 CAR/INT</td><td>-1d4</td></tr>
+        <tr><td>⚕️ Elion</td><td>Ansiedade do Curandeiro</td><td>17</td><td>-2d6 na cura</td><td>-1d4</td></tr>
+        <tr><td>🌿 Evangeline</td><td>Silêncio Aterrorizante</td><td>18</td><td>-4 INT/CAR</td><td>-1d6</td></tr>
+        <tr><td>🍳 Eren</td><td>Culpa do Sobrevivente</td><td>16</td><td>-3 AGI/INT</td><td>-1d6</td></tr>
+        <tr><td>🔨 Kael</td><td>Medo do Monstro Interior</td><td>18</td><td>-3 em todos</td><td>-1d6</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="font-family:'Cinzel',serif; color:#4a7c2a; margin:1.5rem 0 1rem 0;">⚔️ HABILIDADES</h3>
+    <table class="summary-table">
+      <thead>
+        <tr><th>Personagem</th><th>Habilidade 1</th><th>Tipo</th><th>Habilidade 2</th><th>Tipo</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>🏹 Caçador</td><td>Juramento dos Garrakhai</td><td>Resistência</td><td>Caçador Solitário</td><td>Combate</td></tr>
+        <tr><td>🐊 Crocotop</td><td>Mão de Pescador</td><td>Utilidade</td><td>Lembrança de Mara</td><td>Resistência</td></tr>
+        <tr><td>⚕️ Elion</td><td>Mão Firme</td><td>Cura</td><td>Cura Instintiva</td><td>Reação</td></tr>
+        <tr><td>🌿 Evangeline</td><td>Leitura de Fenômenos</td><td>Percepção</td><td>Conexão de Padrões</td><td>Investigação</td></tr>
+        <tr><td>🍳 Eren</td><td>Predador de Oportunidades</td><td>Combate</td><td>Sombra Protetora</td><td>Defesa</td></tr>
+        <tr><td>🔨 Kael</td><td>Forja da Vontade</td><td>Resistência</td><td>Ferrada Negra</td><td>Combate</td></tr>
+        <tr><td>🏹+🔨</td><td colspan="4"><strong>Rastro de Ferro</strong> — Combate Combinado</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  function switchTab(tabName) {
+    const buttons = document.querySelectorAll('.tab-btn');
+    buttons.forEach(btn => btn.classList.remove('active'));
+
+    const contents = document.querySelectorAll('.tab-content');
+    contents.forEach(content => content.classList.remove('active'));
+
+    const activeContent = document.getElementById('tab-' + tabName);
+    if (activeContent) activeContent.classList.add('active');
+
+    const tabLabels = {
+      'status': '📊',
+      'debuffs': '☠️',
+      'buffs': '⚔️',
+      'combinadas': '🔥',
+      'resumo': '📋'
+    };
+    const label = tabLabels[tabName];
+    const activeBtn = Array.from(buttons).find(btn => btn.textContent.includes(label));
+    if (activeBtn) activeBtn.classList.add('active');
+  }
+</script>
+
+</body>
+</html>

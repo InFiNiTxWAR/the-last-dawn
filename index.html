@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>THE LAST DAWN • Crônicas do Reino</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
+
+    :root {
+      --gold: #c9a84c;
+      --gold-light: #e8d48b;
+      --gold-dark: #8b6914;
+      --parchment: #f0e2c5;
+      --parchment-dark: #d4c09a;
+      --parchment-light: #faf3e3;
+      --brown-dark: #2c1810;
+      --brown-mid: #4a2c1a;
+      --leather: #6b4c2a;
+      --blood: #8b1a1a;
+      --ink: #3a2210;
+      --rune-glow: rgba(201, 168, 76, 0.6);
+    }
+
+    body {
+      background: #1a1008;
+      background-image:
+        radial-gradient(ellipse at center, #2c1810 0%, #1a1008 60%, #0d0805 100%);
+      font-family: 'Cormorant Garamond', 'Georgia', serif;
+      color: var(--parchment);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        repeating-linear-gradient(90deg, rgba(50, 30, 10, 0.2) 0px, rgba(50, 30, 10, 0.2) 2px, transparent 2px, transparent 80px),
+        repeating-linear-gradient(0deg, rgba(30, 18, 8, 0.15) 0px, rgba(30, 18, 8, 0.15) 2px, transparent 2px, transparent 120px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      background: rgba(232, 212, 139, 0.4);
+      border-radius: 50%;
+      width: 2px;
+      height: 2px;
+      animation: floatParticle 6s infinite ease-in-out;
+      opacity: 0;
+      box-shadow: 0 0 6px var(--rune-glow);
+    }
+
+    @keyframes floatParticle {
+      0% { transform: translateY(0px) translateX(0); opacity: 0; }
+      20% { opacity: 0.5; }
+      80% { opacity: 0.3; }
+      100% { transform: translateY(-50px) translateX(20px); opacity: 0; }
+    }
+
+    .container {
+      max-width: 1200px;
+      width: 100%;
+      background: linear-gradient(180deg, rgba(44, 24, 16, 0.95) 0%, rgba(30, 18, 10, 0.98) 100%);
+      border: 4px solid var(--gold-dark);
+      border-radius: 12px;
+      box-shadow:
+        0 0 60px rgba(139, 105, 20, 0.3),
+        inset 0 0 40px rgba(0, 0, 0, 0.8),
+        0 0 0 2px var(--leather),
+        0 0 0 6px var(--brown-dark);
+      padding: 2.5rem;
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .top-panel {
+      border: 3px solid var(--gold-dark);
+      background: linear-gradient(180deg, rgba(60, 35, 20, 0.8) 0%, rgba(30, 18, 10, 0.9) 100%);
+      padding: 1.2rem 1.8rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 8px;
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      color: var(--gold-light);
+      box-shadow: 0 0 20px rgba(139, 105, 20, 0.2), inset 0 0 30px rgba(0, 0, 0, 0.5);
+      text-transform: uppercase;
+    }
+
+    .panel-item {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .panel-label {
+      color: var(--gold);
+      font-weight: bold;
+    }
+
+    .main-title {
+      text-align: center;
+      padding: 1.5rem 0;
+      margin-bottom: 0.5rem;
+    }
+
+    .main-title h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 3rem;
+      letter-spacing: 8px;
+      color: var(--gold);
+      text-shadow: 0 0 20px var(--rune-glow), 2px 2px 4px rgba(0, 0, 0, 0.8);
+      font-weight: 900;
+    }
+
+    .subtitle {
+      font-family: 'Cinzel', serif;
+      color: var(--gold-light);
+      font-size: 1rem;
+      letter-spacing: 2px;
+      opacity: 0.8;
+    }
+
+    .sessions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .session-card {
+      background: linear-gradient(180deg, var(--parchment-light) 0%, var(--parchment) 50%, var(--parchment-dark) 100%);
+      border: 3px solid var(--brown-mid);
+      padding: 1.5rem;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+      min-height: 200px;
+      justify-content: center;
+      color: var(--ink);
+    }
+
+    .session-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8), 0 0 40px rgba(201, 168, 76, 0.3);
+      border-color: var(--gold);
+    }
+
+    .available {
+      border-left: 4px solid var(--gold);
+    }
+
+    .available .session-title {
+      font-family: 'Cinzel', serif;
+      color: var(--brown-dark);
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    .new-badge {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: linear-gradient(180deg, var(--gold) 0%, var(--gold-dark) 100%);
+      color: var(--brown-dark);
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 3px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      box-shadow: 0 0 15px rgba(201, 168, 76, 0.6);
+      animation: pulseBadge 2s infinite;
+      text-transform: uppercase;
+      z-index: 5;
+    }
+
+    @keyframes pulseBadge {
+      0%, 100% { opacity: 1; box-shadow: 0 0 15px rgba(201, 168, 76, 0.6); }
+      50% { opacity: 0.7; box-shadow: 0 0 30px rgba(201, 168, 76, 0.9); }
+    }
+
+    .btn-access {
+      margin-top: 1rem;
+      background: linear-gradient(180deg, var(--brown-dark) 0%, #1a0f08 100%);
+      border: 2px solid var(--gold);
+      color: var(--gold-light);
+      padding: 0.5rem 1.5rem;
+      font-family: 'Cinzel', serif;
+      font-weight: bold;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: 0.3s;
+      text-transform: uppercase;
+      border-radius: 3px;
+      font-size: 0.85rem;
+    }
+
+    .btn-access:hover {
+      background: linear-gradient(180deg, #4a2c1a 0%, #2c1810 100%);
+      color: #fff;
+      box-shadow: 0 0 25px rgba(201, 168, 76, 0.5);
+    }
+
+    .locked {
+      border-left: 4px solid #8b7a5a;
+      cursor: default;
+      position: relative;
+    }
+
+    .locked:hover {
+      border-color: #8b7a5a;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+      transform: translateY(-4px);
+    }
+
+    /* GALERIA DE PERSONAGENS */
+    .gallery-section {
+      margin-top: 2rem;
+      border-top: 3px solid var(--gold-dark);
+      padding-top: 2rem;
+    }
+
+    .gallery-title {
+      text-align: center;
+      font-family: 'Cinzel', serif;
+      font-size: 2rem;
+      color: var(--gold);
+      text-shadow: 0 0 15px var(--rune-glow);
+      margin-bottom: 1.5rem;
+      letter-spacing: 3px;
+    }
+
+    .characters-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .character-card {
+      background: rgba(15, 8, 4, 0.9);
+      border: 2px solid var(--gold-dark);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      text-align: center;
+    }
+
+    .character-card:hover {
+      border-color: var(--gold);
+      box-shadow: 0 0 30px rgba(201, 168, 76, 0.5);
+      transform: translateY(-5px);
+    }
+
+    .character-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid var(--gold);
+      margin: 1rem auto;
+      overflow: hidden;
+      background: #1a0f08;
+    }
+
+    .character-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .character-name {
+      font-family: 'Cinzel', serif;
+      color: var(--gold-light);
+      font-size: 1.2rem;
+      margin-bottom: 0.3rem;
+      letter-spacing: 2px;
+    }
+
+    .character-class {
+      color: #a89870;
+      font-size: 0.85rem;
+      font-style: italic;
+      margin-bottom: 1rem;
+    }
+
+    .music-indicator {
+      font-size: 0.7rem;
+      color: #6b4c2a;
+      margin-bottom: 0.5rem;
+      font-style: italic;
+    }
+
+    @media (max-width: 600px) {
+      body { padding: 1rem; }
+      .container { padding: 1.5rem; }
+      .top-panel { flex-direction: column; gap: 0.5rem; font-size: 0.75rem; }
+      .main-title h1 { font-size: 2rem; letter-spacing: 4px; }
+      .characters-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <div class="particles" id="particlesContainer"></div>
+
+  <div class="container">
+    <!-- PAINEL SUPERIOR -->
+    <div class="top-panel">
+      <div class="panel-item">
+        <span style="font-size:1.5rem;">🏰</span>
+        <span class="panel-label">CRÔNICAS DE THE LAST DAWN</span>
+      </div>
+      <div class="panel-item"><span class="panel-label">Escriba:</span> Barn Clant</div>
+      <div class="panel-item"><span class="panel-label">Reino:</span> Zaharam</div>
+      <div class="panel-item"><span class="panel-label">Relatos:</span> 05 / 06</div>
+    </div>
+
+    <div class="main-title">
+      <h1>THE LAST DAWN</h1>
+      <div style="color: var(--gold-dark); font-size: 1.2rem; letter-spacing: 4px; margin: 0.5rem 0;">ᚱ ᚨ ᚠ ᚨ ᛖ ᛚ</div>
+      <div class="subtitle">━━━ Crônicas & Registros do Reino de Zaharam ━━━</div>
+    </div>
+
+    <!-- GRID DE SESSÕES -->
+    <div class="sessions-grid" id="sessionGrid">
+      <div class="session-card available" onclick="window.location.href='sessoes/sessao14.html'">
+        <div class="session-title">SESSÃO XIV</div>
+        <div style="font-family:'Cinzel',serif; font-size:1rem; font-weight:bold; color:#4a2c1a;">Ecos de uma Frequência Morta</div>
+        <div style="margin:0.5rem 0; color:#4a2c1a;">📜 Relato disponível</div>
+        <button class="btn-access">⚜ Abrir Relato</button>
+      </div>
+
+      <div class="session-card available" onclick="window.location.href='sessoes/sessao15.html'">
+        <div class="session-title">SESSÃO XV</div>
+        <div style="font-family:'Cinzel',serif; font-size:1rem; font-weight:bold; color:#4a2c1a;">A Quinta Tempestade</div>
+        <div style="margin:0.5rem 0; color:#4a2c1a;">📜 Relato disponível</div>
+        <button class="btn-access">⚜ Abrir Relato</button>
+      </div>
+
+      <div class="session-card available" onclick="window.location.href='sessoes/sessao16.html'">
+        <div class="session-title">SESSÃO XVI</div>
+        <div style="font-family:'Cinzel',serif; font-size:1rem; font-weight:bold; color:#4a2c1a;">A Ruptura do Céu</div>
+        <div style="margin:0.5rem 0; color:#4a2c1a;">📜 Relato disponível</div>
+        <button class="btn-access">⚜ Abrir Relato</button>
+      </div>
+
+      <div class="session-card available" onclick="window.location.href='sessoes/timeskip.html'">
+        <div class="session-title">TIMESKIP</div>
+        <div style="font-family:'Cinzel',serif; font-size:1rem; font-weight:bold; color:#4a2c1a;">O Salto Temporal</div>
+        <div style="margin:0.5rem 0; color:#4a2c1a;">📜 Relato disponível</div>
+        <button class="btn-access">⚜ Abrir Relato</button>
+      </div>
+
+      <div class="session-card available" style="position:relative;" onclick="window.location.href='sessoes/sessao19.html'">
+        <div class="new-badge">Novo Relato</div>
+        <div class="session-title">SESSÃO XIX</div>
+        <div style="font-family:'Cinzel',serif; font-size:1rem; font-weight:bold; color:#4a2c1a;">A Verdade Entre Mentiras</div>
+        <div style="margin:0.5rem 0; color:#4a2c1a;">📜 Relato disponível</div>
+        <button class="btn-access">⚜ Abrir Relato</button>
+      </div>
+
+      <div class="session-card locked" id="card17">
+        <div style="font-family:'Cinzel',serif; font-size:1.3rem; color:#6b5a3a;">SESSÃO XVII</div>
+        <div style="font-size:2rem; margin:0.5rem 0;">🔒</div>
+        <div style="color:#5a4a2a; font-size:0.85rem;">Relato Selado</div>
+      </div>
+
+      <div class="session-card locked" id="card18">
+        <div style="font-family:'Cinzel',serif; font-size:1.3rem; color:#6b5a3a;">SESSÃO XVIII</div>
+        <div style="font-size:2rem; margin:0.5rem 0;">🔒</div>
+        <div style="color:#5a4a2a; font-size:0.85rem;">Relato Selado</div>
+      </div>
+    </div>
+
+    <!-- GALERIA DE PERSONAGENS -->
+    <div class="gallery-section">
+      <h2 class="gallery-title">⚜ GALERIA DOS HERÓIS ⚜</h2>
+      <p style="text-align:center; color:#a89870; font-style:italic; margin-bottom:1.5rem;">
+        "Cada herói carrega sua própria melodia nas sombras da Quinta Tempestade"
+      </p>
+
+      <div class="characters-grid" id="charactersGrid">
+        <!-- Os cards serão gerados via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      // Criar partículas douradas
+      const particlesContainer = document.getElementById('particlesContainer');
+      for (let i = 0; i < 50; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 10 + 's';
+        particle.style.width = (Math.random() * 2.5 + 0.5) + 'px';
+        particle.style.height = particle.style.width;
+        particlesContainer.appendChild(particle);
+      }
+
+      // Adicionar evento de clique para cards bloqueados
+      const lockedCards = document.querySelectorAll('.locked');
+      lockedCards.forEach(card => {
+        card.addEventListener('click', function () {
+          showDeniedPopup();
+        });
+      });
+
+      // GALERIA DE PERSONAGENS
+      const charactersGrid = document.getElementById('charactersGrid');
+
+      const personagens = [
+        {
+          nome: "Elion",
+          classe: "Médico / Clérigo",
+          avatar: "assets/img/elion.png",
+          pagina: "personagens/elion.html"
+        },
+        {
+          nome: "Evangeline",
+          classe: "Herbalista / Alquimista",
+          avatar: "assets/img/evangeline.png",
+          pagina: "personagens/evangeline.html"
+        },
+        {
+          nome: "Caçador",
+          classe: "Rastreador",
+          avatar: "assets/img/caçador.png",
+          pagina: "personagens/cacador.html"
+        },
+        {
+          nome: "Crocotop",
+          classe: "Pescador",
+          avatar: "assets/img/crocotop.png",
+          pagina: "personagens/crocotop.html"
+        },
+        {
+          nome: "Eren",
+          classe: "Cozinheiro",
+          avatar: "assets/img/eren.png",
+          pagina: "personagens/eren.html"
+        },
+        {
+          nome: "Dravon",
+          classe: "Mercenário",
+          avatar: "assets/img/dravon.png",
+          pagina: "personagens/dravon.html"
+        },
+        {
+          nome: "Kael",
+          classe: "Ferreiro",
+          avatar: "assets/img/kael.png",
+          pagina: "personagens/kael.html"
+        },
+        {
+          nome: "NPCs",
+          classe: "Aliados & Inimigos",
+          avatar: "assets/img/npcs.png",
+          pagina: "personagens/npcs.html"
+        }
+      ];
+
+      personagens.forEach(personagem => {
+        const card = document.createElement('div');
+        card.className = 'character-card';
+
+        card.innerHTML = `
+          <div class="character-avatar">
+            <img src="${personagem.avatar}" alt="${personagem.nome}">
+          </div>
+          <div class="character-name">${personagem.nome}</div>
+          <div class="character-class">${personagem.classe}</div>
+          <div class="music-indicator">🎵 Tema próprio</div>
+        `;
+
+        card.addEventListener('click', function () {
+          window.location.href = personagem.pagina;
+        });
+
+        charactersGrid.appendChild(card);
+      });
+    })();
+
+    function showDeniedPopup() {
+      const existing = document.getElementById('deniedToast');
+      if (existing) existing.remove();
+
+      const toast = document.createElement('div');
+      toast.id = 'deniedToast';
+      toast.style.position = 'fixed';
+      toast.style.bottom = '30px';
+      toast.style.left = '50%';
+      toast.style.transform = 'translateX(-50%)';
+      toast.style.background = 'linear-gradient(180deg, #2c1810 0%, #1a0f08 100%)';
+      toast.style.border = '2px solid #c9a84c';
+      toast.style.color = '#e8d48b';
+      toast.style.padding = '1rem 2rem';
+      toast.style.fontFamily = 'Cinzel, serif';
+      toast.style.zIndex = '2000';
+      toast.style.boxShadow = '0 0 30px rgba(201, 168, 76, 0.5)';
+      toast.style.textAlign = 'center';
+      toast.style.letterSpacing = '2px';
+      toast.style.borderRadius = '4px';
+      toast.innerHTML = '🔐 SELO NÃO REMOVIDO<br><span style="font-size:0.8rem; opacity:0.8;">Este relato ainda está selado.</span>';
+
+      document.body.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.transition = 'opacity 0.5s';
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 500);
+      }, 3000);
+    }
+  </script>
+</body>
+</html>
